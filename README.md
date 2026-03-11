@@ -10,6 +10,7 @@ DGU-UMC 9기 Android 스터디 A조
 | 김도엽 | [wlgusqkr](https://github.com/wlgusqkr) |
 | 이창환 | [wlgusqkr](https://github.com/wlgusqkr) |
 | 김재환 | [wlgusqkr](https://github.com/wlgusqkr) |
+| 김재환 | [wlgusqkr](https://github.com/wlgusqkr) |
 
 ## 🌳 branch 규칙
 
