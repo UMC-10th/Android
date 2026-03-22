@@ -2,6 +2,7 @@ package com.example.androidstudy
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidstudy.databinding.ActivityMainBinding
@@ -9,6 +10,7 @@ import com.example.androidstudy.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var selectedTextView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,9 @@ class MainActivity : AppCompatActivity() {
 
             items.forEach { (textView, imageView, color) ->
                 imageView.setOnClickListener {
+                    selectedTextView?.setTextColor(Color.BLACK)
                     textView.setTextColor(color)
+                    selectedTextView = textView
                 }
             }
         }
