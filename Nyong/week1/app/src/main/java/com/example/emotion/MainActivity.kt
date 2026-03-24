@@ -8,57 +8,66 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+// 바인딩을 쓰기 위해 가져오는 주소
+import com.example.emotion.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    // 'binding'이라는 이름의 단축 번호판을 미리 준비
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+
+        // 화면 설계도(activity_main.xml)를 단축 번호판에 모두 연결
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        // 기존의 setContentView(R.layout.activity_main) 대신 바인딩된 화면의 뿌리(root)를 띄워준다
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // 1. XML에 있는 5개의 '우표 이미지'를 코드로 찾아옵니다.
-        val imgHappy = findViewById<ImageView>(R.id.img_happy)
-        val imgExcited = findViewById<ImageView>(R.id.img_excited)
-        val imgNormal = findViewById<ImageView>(R.id.img_normal)
-        val imgSad = findViewById<ImageView>(R.id.img_sad)
-        val imgAngry = findViewById<ImageView>(R.id.img_angry)
-
-        // 2. XML에 있는 5개의 '설명 텍스트'를 코드로 찾아옵니다.
-        val tvHappy = findViewById<TextView>(R.id.tv_happy)
-        val tvExcited = findViewById<TextView>(R.id.tv_excited)
-        val tvNormal = findViewById<TextView>(R.id.tv_normal)
-        val tvSad = findViewById<TextView>(R.id.tv_sad)
-        val tvAngry = findViewById<TextView>(R.id.tv_angry)
-
-        // 3. 각각의 우표를 클릭했을 때 글자 색깔이 변하도록 이벤트를 달아줍니다.
-
-        // ① 행복 우표 (노란색)
-        imgHappy.setOnClickListener {
-            tvHappy.setTextColor(Color.parseColor("#FFB300"))
+        // 이벤트 추가
+        fun resetAllTextColors() {
+            // 이제 앞에 'binding.' 만 붙이면 XML에 있는 위젯 이름을 바로 꺼내 쓸수있다
+            binding.tvHappy.setTextColor(Color.BLACK)
+            binding.tvExcited.setTextColor(Color.BLACK)
+            binding.tvNormal.setTextColor(Color.BLACK)
+            binding.tvSad.setTextColor(Color.BLACK)
+            binding.tvAngry.setTextColor(Color.BLACK)
         }
 
-        // ② 흥분 우표 (초록색)
-        imgExcited.setOnClickListener {
-            tvExcited.setTextColor(Color.parseColor("#4CAF50"))
+        // ① 행복 우표
+        binding.imgHappy.setOnClickListener {
+            resetAllTextColors()
+            binding.tvHappy.setTextColor(Color.parseColor("#FFB300"))
         }
 
-        // ③ 평범 우표 (보라색)
-        imgNormal.setOnClickListener {
-            tvNormal.setTextColor(Color.parseColor("#9C27B0"))
+        // ② 흥분 우표
+        binding.imgExcited.setOnClickListener {
+            resetAllTextColors()
+            binding.tvExcited.setTextColor(Color.parseColor("#2196F3"))
         }
 
-        // ④ 슬픔 우표 (파란색)
-        imgSad.setOnClickListener {
-            tvSad.setTextColor(Color.parseColor("#2196F3"))
+        // ③ 평범 우표
+        binding.imgNormal.setOnClickListener {
+            resetAllTextColors()
+            binding.tvNormal.setTextColor(Color.parseColor("#9C27B0"))
         }
 
-        // ⑤ 화남 우표 (빨간색)
-        imgAngry.setOnClickListener {
-            tvAngry.setTextColor(Color.parseColor("#F44336"))
+        // ④ 슬픔 우표
+        binding.imgSad.setOnClickListener {
+            resetAllTextColors()
+            binding.tvSad.setTextColor(Color.parseColor("#4CAF50"))
+        }
+
+        // ⑤ 화남 우표
+        binding.imgAngry.setOnClickListener {
+            resetAllTextColors()
+            binding.tvAngry.setTextColor(Color.parseColor("#F44336"))
         }
     }
 }
