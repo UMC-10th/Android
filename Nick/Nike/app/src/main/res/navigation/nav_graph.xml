@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph">
 
     <fragment
-        android:id="@+id/homeFragment"/>
+        android:id="@+id/homeFragment"
+        android:name="com.clone.nike.HomeFragment"
+        android:label="홈"
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
-        android:id="@+id/purchaseFragment"/>
+        android:id="@+id/purchaseFragment"
+        android:name="com.clone.nike.PurchaseFragment"
+        android:label="구매하기"
+        tools:layout="@layout/fragment_purchase"/>
 
     <fragment
-        android:id="@+id/wishFragment"/>
+        android:id="@+id/wishFragment"
+        android:name="com.clone.nike.WishFragment"
+        android:label="위시리스트"
+        tools:layout="@layout/fragment_wish"/>
 
     <fragment
-        android:id="@+id/cartFragment"/>
+        android:id="@+id/cartFragment"
+        android:name="com.clone.nike.CartFragment"
+        android:label="장바구니"
+        tools:layout="@layout/fragment_cart">
+
+        <action
+            android:id="@+id/action_cart_to_purchase"
+            app:destination="@id/purchaseFragment"/>
+    </fragment>
 
     <fragment
-        android:id="@+id/profileFragment"/>
+        android:id="@+id/profileFragment"
+        android:name="com.clone.nike.ProfileFragment"
+        android:label="프로필"
+        tools:layout="@layout/fragment_profile"/>
 
 </navigation>
