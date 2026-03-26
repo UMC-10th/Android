@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">emotion</string>
+    <!-- title -->
+    <string name="main_title">오늘 하루는 어땠나요?</string>
+    <string name="sub_title">감정우표를 선택해주세요</string>
+    <string name="description">선택한 감정우표를 기반으로 맞춤형 질문이 배달됩니다</string>
+    <!-- options -->
+    <string name="happy">더없이 행복한 하루였어요</string>
+    <string name="excited">들뜨고 흥분돼요</string>
+    <string name="normal">평범한 하루였어요</string>
+    <string name="anxious">생각이 많아지고 불안해요</string>
+    <string name="anger">부글부글 화가 나요</string>
+</resources>
