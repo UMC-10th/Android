@@ -1,6 +1,8 @@
 package com.clone.nike
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        //뒤로가기 버튼 인식 콜백
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         //BottomNav (Navigation 기반)
         val navHostFragment =
@@ -73,5 +76,20 @@ class MainActivity : AppCompatActivity() {
 //                else -> false
 //            }
 //        }
+    }
+
+    // 뒤로가기 두번 클릭 시 종료
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        var pressedTime:Long = 0;
+        override fun handleOnBackPressed() {
+            if(System.currentTimeMillis() - pressedTime >= 2000) {
+                pressedTime = System.currentTimeMillis()
+                Toast.makeText(this@MainActivity, "뒤로가기 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                finishAffinity()
+            }
+        }
+
     }
 }

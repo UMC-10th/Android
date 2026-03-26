@@ -18,4 +18,13 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val title = requireActivity().intent.getStringExtra("title")
+        binding.homeTitleTV.text = title
+
+
+    }
 }
