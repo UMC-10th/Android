@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:text="@string/wish_title"
         android:textAppearance="@style/title"
+        android:includeFontPadding="false"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

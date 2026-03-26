@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:text="@string/home_title"
         android:textAppearance="@style/title"
+        android:includeFontPadding="false"
+
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +27,8 @@
         android:layout_height="wrap_content"
         android:text="@string/home_today"
         android:textAppearance="@style/r16_gray"
+        android:includeFontPadding="false"
+
 
         app:layout_constraintTop_toBottomOf="@id/home_title_TV"
         app:layout_constraintStart_toStartOf="parent"

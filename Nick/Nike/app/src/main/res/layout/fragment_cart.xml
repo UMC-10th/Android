@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cart_empty"
         android:textAppearance="@style/r14_black"
+        android:includeFontPadding="false"
         
         app:layout_constraintTop_toBottomOf="@id/cart_empty_icon_IV"
         
@@ -36,6 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cart_order_button"
+        android:textAppearance="@style/button_white"
+        android:background="@drawable/background_button"
+        android:includeFontPadding="false"
 
         app:layout_constraintBottom_toBottomOf="parent"
 

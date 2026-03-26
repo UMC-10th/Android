@@ -23,8 +23,9 @@ class CartFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //버튼 클릭 시 이동
         binding.cartOrderBT.setOnClickListener {
-            findNavController().navigate()
+            findNavController().navigate(R.id.action_cart_to_purchase)
         }
     }
 }
