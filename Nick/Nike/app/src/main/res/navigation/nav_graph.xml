@@ -28,10 +28,6 @@
         android:name="com.clone.nike.CartFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_cart">
-
-        <action
-            android:id="@+id/action_cart_to_purchase"
-            app:destination="@id/purchaseFragment"/>
     </fragment>
 
     <fragment

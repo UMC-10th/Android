@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.clone.nike.databinding.FragmentCartBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartFragment: Fragment() {
     private lateinit var binding: FragmentCartBinding
@@ -25,7 +26,9 @@ class CartFragment: Fragment() {
 
         //버튼 클릭 시 이동
         binding.cartOrderBT.setOnClickListener {
-            findNavController().navigate(R.id.action_cart_to_purchase)
+            requireActivity()
+                .findViewById<BottomNavigationView>(R.id.main_bottomNav)
+                .selectedItemId = R.id.purchaseFragment
         }
     }
 }
