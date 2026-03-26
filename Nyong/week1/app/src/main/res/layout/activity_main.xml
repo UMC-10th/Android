@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="오늘 하루는 어땠나요?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_bottom_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_happy"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_happy"
+        app:layout_constraintBottom_toTopOf="@+id/tv_happy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottom_description" />
+
+    <TextView
+        android:id="@+id/tv_happy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="더없이 행복한 하루였어요"
+        app:layout_constraintBottom_toTopOf="@+id/img_excited"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_happy" />
+
+    <ImageView
+        android:id="@+id/img_excited"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_excited"
+        app:layout_constraintBottom_toTopOf="@+id/tv_excited"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_happy" />
+
+    <TextView
+        android:id="@+id/tv_excited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="들뜨고 흥분돼요"
+        app:layout_constraintBottom_toTopOf="@+id/img_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_excited" />
+
+    <ImageView
+        android:id="@+id/img_normal"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_normal"
+        app:layout_constraintBottom_toTopOf="@+id/tv_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_excited" />
+
+    <TextView
+        android:id="@+id/tv_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="평범한 하루였어요"
+        app:layout_constraintBottom_toTopOf="@+id/img_sad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_normal" />
+
+    <ImageView
+        android:id="@+id/img_sad"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_sad"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_normal" />
+
+    <TextView
+        android:id="@+id/tv_sad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="우울하고 슬픈 날이었어요"
+        app:layout_constraintBottom_toTopOf="@+id/img_angry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_sad" />
+
+    <ImageView
+        android:id="@+id/img_angry"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_angry"
+        app:layout_constraintBottom_toTopOf="@+id/tv_angry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sad" />
+
+    <TextView
+        android:id="@+id/tv_angry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="화나고 짜증나는 하루였어요"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_angry" />
+
+    <TextView
+        android:id="@+id/tv_bottom_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="감정우표를 선택해주세요. 선택한 감정우표를 기반으로\n당신의 마음과 맞는 편지가 배달됩니다."
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/img_happy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>
