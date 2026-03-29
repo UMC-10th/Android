@@ -35,6 +35,11 @@
         android:label="장바구니"
         tools:layout="@layout/fragment_cart">
 
+        <!-- 주문하기 버튼을 누르면 구매하기 탭으로 이동 -->
+        <action
+            android:id="@+id/action_order_to_checkout"
+            app:destination="@id/checkoutFragment"/>
+
     </fragment>
 
     <fragment
