@@ -7,4 +7,10 @@
     <string name="cart_order_button">주문하기</string>
     <string name="home_new">What\'s new</string>
     <string name="home_new_sub">나이키 최신 상품</string>
+    <string name="item_new_name">Air Jordan XXXVI</string>
+    <string name="item_new_price">US$185</string>
+    <string name="item_purchase_name">Nike Everyday Plus Cushioned</string>
+    <string name="item_purchase_detail">Traning Ankle Socks (6 Pairs)</string>
+    <string name="item_purchase_colour">5 Colours</string>
+    <string name="item_purchase_price">US$10</string>
 </resources>
