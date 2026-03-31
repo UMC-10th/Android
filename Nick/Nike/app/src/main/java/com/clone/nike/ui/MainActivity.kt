@@ -1,15 +1,11 @@
-package com.clone.nike
+package com.clone.nike.ui
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.clone.nike.R
 import com.clone.nike.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

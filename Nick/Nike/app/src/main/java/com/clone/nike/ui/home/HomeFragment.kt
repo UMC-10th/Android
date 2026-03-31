@@ -1,4 +1,4 @@
-package com.clone.nike
+package com.clone.nike.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

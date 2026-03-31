@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.clone.nike.HomeFragment"
+        android:name="com.clone.nike.ui.home.HomeFragment"
         android:label="홈"
         tools:layout="@layout/fragment_home"/>
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.clone.nike.CartFragment"
+        android:name="com.clone.nike.ui.cart.CartFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_cart">
 
