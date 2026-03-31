@@ -5,4 +5,6 @@
     <string name="wish_title">위시리스트</string>
     <string name="cart_empty">장바구니가 비어 있습니다.\n제품을 추가하면 여기에 표시됩니다.</string>
     <string name="cart_order_button">주문하기</string>
+    <string name="home_new">What\'s new</string>
+    <string name="home_new_sub">나이키 최신 상품</string>
 </resources>

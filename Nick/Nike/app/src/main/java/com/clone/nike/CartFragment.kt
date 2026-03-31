@@ -29,6 +29,8 @@ class CartFragment: Fragment() {
             requireActivity()
                 .findViewById<BottomNavigationView>(R.id.main_bottomNav)
                 .selectedItemId = R.id.purchaseFragment
+
+//            findNavController().navigate(R.id.action_cart_to_purchase)
         }
     }
 }
