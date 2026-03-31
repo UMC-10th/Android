@@ -1,10 +1,11 @@
-package com.clone.nike.ui.purchase
+package com.clone.nike.ui.wish
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.clone.nike.databinding.FragmentWishBinding
 
 class WishFragment: Fragment() {
     private lateinit var binding: FragmentWishBinding

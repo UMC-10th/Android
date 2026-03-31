@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.clone.nike.R
 import com.clone.nike.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -29,6 +31,16 @@ class HomeFragment : Fragment() {
 
         //뒤로가기 버튼 인식 콜백
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+
+        //더미 데이터
+        val newGoodsDataList = mutableListOf(
+            NewGoodsData(R.drawable.image_jordan_xxxvi,"Air jordan XXXVI","US$185"),
+            NewGoodsData(R.drawable.image_air_force_1, "Nike Air Force 1 '07", "US$115")
+        )
+
+        val adapter = NewRVAdapter(newGoodsDataList)
+        binding.homeNewRV.adapter = adapter
+        binding.homeNewRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     // 뒤로가기 두번 클릭 시 종료

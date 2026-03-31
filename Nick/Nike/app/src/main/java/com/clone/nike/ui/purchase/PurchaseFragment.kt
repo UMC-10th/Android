@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.clone.nike.databinding.FragmentPurchaseBinding
 
 class PurchaseFragment: Fragment() {
     private lateinit var binding: FragmentPurchaseBinding

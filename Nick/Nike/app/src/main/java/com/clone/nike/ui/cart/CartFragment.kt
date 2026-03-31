@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.clone.nike.R
+import com.clone.nike.databinding.FragmentCartBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartFragment: Fragment() {
