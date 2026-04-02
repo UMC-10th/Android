@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clone.nike.R
 import com.clone.nike.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NewOnclickListener {
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //splash에서 title 받아오기
         val title = requireActivity().intent.getStringExtra("title")
         binding.homeTitleTV.text = title
 
@@ -38,7 +40,8 @@ class HomeFragment : Fragment() {
             NewGoodsData(R.drawable.image_air_force_1, "Nike Air Force 1 '07", "US$115")
         )
 
-        val adapter = NewRVAdapter(newGoodsDataList)
+        //adapter 연결
+        val adapter = NewRVAdapter(newGoodsDataList, this)
         binding.homeNewRV.adapter = adapter
         binding.homeNewRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
@@ -56,5 +59,10 @@ class HomeFragment : Fragment() {
             }
         }
 
+    }
+
+    //RV delegate pattern
+    override fun newGoodsOnClickListener(newGoods: NewGoodsData) {
+        findNavController().navigate(R.id.action_home_to_detail)
     }
 }

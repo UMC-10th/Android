@@ -9,13 +9,26 @@
         android:id="@+id/homeFragment"
         android:name="com.clone.nike.ui.home.HomeFragment"
         android:label="홈"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@id/goodsDetailFragment"/>
+    </fragment>
+
+
 
     <fragment
         android:id="@+id/purchaseFragment"
         android:name="com.clone.nike.ui.purchase.PurchaseFragment"
         android:label="구매하기"
-        tools:layout="@layout/fragment_purchase"/>
+        tools:layout="@layout/fragment_purchase">
+
+        <action
+            android:id="@+id/action_purchase_to_detail"
+            app:destination="@id/goodsDetailFragment"/>
+    </fragment>
+
 
     <fragment
         android:id="@+id/wishFragment"
@@ -28,11 +41,6 @@
         android:name="com.clone.nike.ui.cart.CartFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_cart">
-
-<!--        <action-->
-<!--            android:id="@+id/action_cart_to_purchase"-->
-<!--            app:destination="@id/purchaseFragment"/>-->
-
     </fragment>
 
     <fragment
@@ -40,5 +48,11 @@
         android:name="com.clone.nike.ui.profile.ProfileFragment"
         android:label="프로필"
         tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/goodsDetailFragment"
+        android:name="com.clone.nike.ui.purchase.GoodsDetail"
+        android:label="제품 상세"
+        tools:layout="@layout/fragment_detail"/>
 
 </navigation>

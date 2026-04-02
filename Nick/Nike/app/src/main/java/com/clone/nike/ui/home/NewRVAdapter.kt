@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.clone.nike.databinding.ItemNewBinding
 
-class NewRVAdapter(private var newGoodsList: MutableList<NewGoodsData>)
-    : RecyclerView.Adapter<NewRVAdapter.NewViewHolder>()
+class NewRVAdapter(
+    private var newGoodsList: MutableList<NewGoodsData>,
+    private var newOnclickListener: NewOnclickListener
+    ): RecyclerView.Adapter<NewRVAdapter.NewViewHolder>()
 {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,7 +25,11 @@ class NewRVAdapter(private var newGoodsList: MutableList<NewGoodsData>)
         position: Int
     ) {
         val newGoods = newGoodsList[position]
+
         holder.bind(newGoods)
+        holder.binding.itemNewLayout.setOnClickListener {
+            newOnclickListener.newGoodsOnClickListener(newGoods)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -40,8 +46,10 @@ class NewRVAdapter(private var newGoodsList: MutableList<NewGoodsData>)
             }
         }
     }
-
 }
 
+interface NewOnclickListener {
+    fun newGoodsOnClickListener(newGoods: NewGoodsData)
+}
 
 

@@ -25,11 +25,13 @@ class WishFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //더미 데이터
         val wishList = mutableListOf(
             WishListData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10"),
             WishListData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10")
         )
 
+        //adapter연결 (GridLayoutManager)
         val adapter = WishRVAdapter(wishList)
         binding.wishListRV.adapter = adapter
         binding.wishListRV.layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
