@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.nike.HomeFragment"
+        android:label="홈"
+        tools:layout="@layout/fragment_home">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.nike.CheckoutFragment"
+        android:label="구매하기"
+        tools:layout="@layout/fragment_checkout">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.nike.WishlistFragment"
+        android:label="위시리스트"
+        tools:layout="@layout/fragment_wishlist">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.nike.CartFragment"
+        android:label="장바구니"
+        tools:layout="@layout/fragment_cart">
+
+        <!-- 주문하기 버튼을 누르면 구매하기 탭으로 이동 -->
+        <action
+            android:id="@+id/action_order_to_checkout"
+            app:destination="@id/checkoutFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.nike.ProfileFragment"
+        android:label="프로필"
+        tools:layout="@layout/fragment_profile">
+
+    </fragment>
+
+</navigation>
