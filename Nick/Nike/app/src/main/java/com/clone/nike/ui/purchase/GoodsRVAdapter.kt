@@ -1,11 +1,16 @@
 package com.clone.nike.ui.purchase
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.clone.nike.R
 import com.clone.nike.databinding.ItemGoodsListBinding
 
-class GoodsRVAdapter(private var goodsList: MutableList<GoodsData>)
+class GoodsRVAdapter(
+    private var goodsList: MutableList<GoodsData>,
+    private val goodsRVOnclickListener: GoodsRVOnclickListener)
     : RecyclerView.Adapter<GoodsRVAdapter.GoodsViewHolder>() {
 
         override fun onCreateViewHolder(
@@ -21,7 +26,18 @@ class GoodsRVAdapter(private var goodsList: MutableList<GoodsData>)
         position: Int
     ) {
         val goodsList = goodsList[position]
-        holder.bind(goodsList)
+
+        holder.apply {
+            bind(goodsList)
+            binding.itemPurchaseAddWishIV.setOnClickListener {
+                goodsRVOnclickListener.wishOnclickListener(goodsList)
+                checkWished(goodsList, binding.itemPurchaseAddWishIV)
+            }
+            binding.itemPurchaseLL.setOnClickListener {
+                goodsRVOnclickListener.goodsOnclickListener(goodsList)
+                checkWished(goodsList, binding.itemPurchaseAddWishIV)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -36,7 +52,23 @@ class GoodsRVAdapter(private var goodsList: MutableList<GoodsData>)
                 itemPurchaseDetailTV.text = goods.category
                 itemPurchaseColoursTV.text = goods.numberOfColour
                 itemPurchasePriceTV.text = goods.goodsPrice
+
+                checkWished(goods, itemPurchaseAddWishIV)
             }
         }
     }
+
+    fun checkWished(goodsData: GoodsData, imageView: ImageView) {
+        if (goodsData.isWished) {
+            imageView.setImageResource(R.drawable.icon_wish_on)
+        }
+        else {
+            imageView.setImageResource(R.drawable.icon_wish_off)
+        }
+    }
+}
+
+interface GoodsRVOnclickListener {
+    fun wishOnclickListener(goods: GoodsData)
+    fun goodsOnclickListener(goods: GoodsData)
 }

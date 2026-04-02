@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.clone.nike.R
 import com.clone.nike.databinding.FragmentPurchaseBinding
 
-class PurchaseFragment: Fragment() {
+class PurchaseFragment: Fragment(), GoodsRVOnclickListener {
     private lateinit var binding: FragmentPurchaseBinding
 
     override fun onCreateView(
@@ -25,14 +25,22 @@ class PurchaseFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val goodsDataList = mutableListOf(
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10"),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10"),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10"),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10")
+            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false),
+            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false),
+            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false),
+            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false)
         )
 
-        val adapter = GoodsRVAdapter(goodsDataList)
+        val adapter = GoodsRVAdapter(goodsDataList,this)
         binding.purchaseGoodsRV.adapter = adapter
         binding.purchaseGoodsRV.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+    }
+
+    override fun wishOnclickListener(goods: GoodsData) {
+        goods.isWished = !goods.isWished
+    }
+
+    override fun goodsOnclickListener(goods: GoodsData) {
+        TODO("Not yet implemented")
     }
 }

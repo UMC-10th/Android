@@ -1,10 +1,9 @@
-package com.clone.nike.ui.purchase
+package com.clone.nike.ui.wish
 
-data class GoodsData (
+data class WishListData(
     val goodsImgResId: Int,
     val goodsName: String,
     val category: String,
     val numberOfColour: String,
-    val goodsPrice: String,
-    var isWished: Boolean
-)
+    val goodsPrice: String
+    )

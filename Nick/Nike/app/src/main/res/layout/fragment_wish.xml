@@ -21,4 +21,13 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wish_list_RV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/wish_title"
+        android:layout_marginTop="40dp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

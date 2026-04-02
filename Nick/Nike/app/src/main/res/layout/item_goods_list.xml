@@ -5,40 +5,28 @@
     android:paddingHorizontal="14dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/item_purchase_IV"
-        android:layout_width="184dp"
-        android:layout_height="184dp"
-        android:src="@drawable/image_jordan_xxxvi"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/item_purchase_addWish_IV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-
-        android:layout_marginEnd="12dp"
-        android:src="@drawable/icon_wish_off"
-        app:layout_constraintEnd_toEndOf="@id/item_purchase_IV"
-        app:layout_constraintTop_toTopOf="@id/item_purchase_IV" />
-
     <LinearLayout
+        android:id="@+id/item_purchase_LL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:orientation="vertical"
 
-        app:layout_constraintTop_toBottomOf="@id/item_purchase_IV">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_purchase_IV"
+            android:layout_width="184dp"
+            android:layout_height="184dp"
+            android:src="@drawable/image_jordan_xxxvi"/>
 
         <TextView
             android:id="@+id/item_purchase_name_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/item_purchase_name" />
+            android:text="@string/item_purchase_name"
+            android:layout_marginTop="14dp"/>
 
         <TextView
             android:id="@+id/item_purchase_detail_TV"
@@ -61,5 +49,16 @@
             android:layout_marginTop="5dp"
             android:text="@string/item_purchase_price" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/item_purchase_addWish_IV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/icon_wish_off"
+        app:layout_constraintEnd_toEndOf="@id/item_purchase_LL"
+        app:layout_constraintTop_toTopOf="@id/item_purchase_LL"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
