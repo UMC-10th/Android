@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/purchaseFragment"
-        android:name="com.clone.nike.PurchaseFragment"
+        android:name="com.clone.nike.ui.purchase.PurchaseFragment"
         android:label="구매하기"
         tools:layout="@layout/fragment_purchase"/>
 
     <fragment
         android:id="@+id/wishFragment"
-        android:name="com.clone.nike.WishFragment"
+        android:name="com.clone.nike.ui.wish.WishFragment"
         android:label="위시리스트"
         tools:layout="@layout/fragment_wish"/>
 
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.clone.nike.ProfileFragment"
+        android:name="com.clone.nike.ui.profile.ProfileFragment"
         android:label="프로필"
         tools:layout="@layout/fragment_profile"/>
 
