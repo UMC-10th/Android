@@ -15,11 +15,19 @@
         android:name="com.example.nike.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.nike.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+
+        <action
+            android:id="@+id/action_cartFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.nike.ProfileFragment"
