@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.nike.adapter.CheckoutAdapter
 import com.example.nike.adapter.CheckoutPagerAdapter
 import com.example.nike.databinding.FragmentCheckoutBinding
 

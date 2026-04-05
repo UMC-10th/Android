@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nike.R
-import com.example.nike.adapter.CheckoutAdapter
-import com.example.nike.data.CheckoutData
+import com.example.nike.adapter.ProductAdapter
+import com.example.nike.data.ProductData
 import com.example.nike.databinding.FragmentAllContentBinding
 
 class AllContentFragment : Fragment() {
@@ -27,13 +27,13 @@ class AllContentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val allProductList = mutableListOf<CheckoutData>()
-        allProductList.add(CheckoutData(R.drawable.product_image, false, "Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)", "5 Colors", "US$10", true))
-        allProductList.add(CheckoutData(R.drawable.product_image, false, "Nike Elite Crew", "Basketball Socks", "7 Colors", "US$16", false))
-        allProductList.add(CheckoutData(R.drawable.product_image, true, "Nike Air Force 1 '07", "Women's Shoes", "5 Colors", "US$115", false))
-        allProductList.add(CheckoutData(R.drawable.product_image, true, "Jordan ENike Air Force 1 '07ssentials", "Men's Shoes", "2 Colors", "US$115", false))
+        val allProductList = mutableListOf<ProductData>()
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)", "5 Colors", "US$10", true))
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Elite Crew", "Basketball Socks", "7 Colors", "US$16", false))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Nike Air Force 1 '07", "Women's Shoes", "5 Colors", "US$115", false))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Jordan ENike Air Force 1 '07ssentials", "Men's Shoes", "2 Colors", "US$115", false))
 
-        val productAdapter = CheckoutAdapter(allProductList,
+        val productAdapter = ProductAdapter(allProductList,
             onVisitClicked = { checkoutItem ->
                 Toast.makeText(context, "${checkoutItem.name}을 구매할까?", Toast.LENGTH_SHORT).show()
             })

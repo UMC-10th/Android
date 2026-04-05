@@ -3,16 +3,16 @@ package com.example.nike.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nike.data.CheckoutData
+import com.example.nike.data.ProductData
 import com.example.nike.databinding.ItemProductBinding
-import com.example.nike.viewholder.CheckoutViewHolder
+import com.example.nike.viewholder.ProductViewHolder
 
-class CheckoutAdapter(
-    private var CheckoutList: MutableList<CheckoutData>,
-    private val onVisitClicked: (CheckoutData) -> Unit
-    ) : RecyclerView.Adapter<CheckoutViewHolder>() {
+class ProductAdapter(
+    private var productList: MutableList<ProductData>,
+    private val onVisitClicked: (ProductData) -> Unit
+    ) : RecyclerView.Adapter<ProductViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckoutViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = ItemProductBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false)
@@ -23,16 +23,16 @@ class CheckoutAdapter(
         layoutParams.width = parentWidth / 2
         binding.root.layoutParams = layoutParams
 
-        return CheckoutViewHolder(binding)
+        return ProductViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CheckoutViewHolder, position: Int) {
-        val nowCheckout = CheckoutList[position]
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val nowCheckout = productList[position]
         holder.bind(nowCheckout)
     }
 
     override fun getItemCount(): Int {
-        return CheckoutList.size
+        return productList.size
     }
 
 }

@@ -3,12 +3,12 @@ package com.example.nike.viewholder
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nike.R
-import com.example.nike.data.CheckoutData
+import com.example.nike.data.ProductData
 import com.example.nike.databinding.ItemProductBinding
 
-class CheckoutViewHolder(val binding: ItemProductBinding) :
+class ProductViewHolder(val binding: ItemProductBinding) :
 RecyclerView.ViewHolder(binding.root) {
-    fun bind(product: CheckoutData) {
+    fun bind(product: ProductData) {
         binding.productImage.setImageResource(product.image)
         binding.productName.text = product.name
         binding.productDescription.text = product.description
@@ -23,12 +23,18 @@ RecyclerView.ViewHolder(binding.root) {
         }
 
         // 좋아요
-        val heartIcon = if (product.isLiked) {
-            R.drawable.ic_like_fill // 꽉 찬 하트 리소스
+        if (product.isLiked == null) {
+            binding.btnLike.visibility = View.GONE
         } else {
-            R.drawable.ic_like_empty  // 빈 하트 리소스
+            binding.btnLike.visibility = View.VISIBLE
+
+            val heartIcon = if (product.isLiked == true) {
+                R.drawable.ic_like_fill
+            } else {
+                R.drawable.ic_like_empty
+            }
+            binding.btnLike.setImageResource(heartIcon)
         }
-        binding.btnLike.setImageResource(heartIcon)
 
     }
 }
