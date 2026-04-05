@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.clone.nike.databinding.ItemNewBinding
+import com.clone.nike.ui.purchase.GoodsData
 
 class NewRVAdapter(
-    private var newGoodsList: MutableList<NewGoodsData>,
+    private var newGoodsList: MutableList<GoodsData>,
     private var newOnclickListener: NewOnclickListener
     ): RecyclerView.Adapter<NewRVAdapter.NewViewHolder>()
 {
@@ -38,7 +39,7 @@ class NewRVAdapter(
 
     inner class NewViewHolder(val binding: ItemNewBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(new: NewGoodsData) {
+        fun bind(new: GoodsData) {
             binding.apply {
                 itemNewIV.setImageResource(new.goodsImgResId)
                 itemNewNameTV.text = new.goodsName
@@ -49,7 +50,7 @@ class NewRVAdapter(
 }
 
 interface NewOnclickListener {
-    fun newGoodsOnClickListener(newGoods: NewGoodsData)
+    fun newGoodsOnClickListener(newGoods: GoodsData)
 }
 
 

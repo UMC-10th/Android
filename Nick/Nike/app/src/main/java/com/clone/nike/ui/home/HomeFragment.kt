@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clone.nike.R
 import com.clone.nike.databinding.FragmentHomeBinding
+import com.clone.nike.ui.purchase.GoodsData
+import com.clone.nike.ui.purchase.PurchaseFragmentDirections
 
 class HomeFragment : Fragment(), NewOnclickListener {
     private lateinit var binding: FragmentHomeBinding
@@ -36,8 +38,8 @@ class HomeFragment : Fragment(), NewOnclickListener {
 
         //더미 데이터
         val newGoodsDataList = mutableListOf(
-            NewGoodsData(R.drawable.image_jordan_xxxvi,"Air jordan XXXVI","US$185"),
-            NewGoodsData(R.drawable.image_air_force_1, "Nike Air Force 1 '07", "US$115")
+            GoodsData(R.drawable.image_jordan_xxxvi,"Air jordan XXXVI","shoes","1 colour","US$185",false),
+            GoodsData(R.drawable.image_air_force_1, "Nike Air Force 1 '07","shoes","3 colours", "US$115", false)
         )
 
         //adapter 연결
@@ -62,7 +64,11 @@ class HomeFragment : Fragment(), NewOnclickListener {
     }
 
     //RV delegate pattern
-    override fun newGoodsOnClickListener(newGoods: NewGoodsData) {
-        findNavController().navigate(R.id.action_home_to_detail)
+    override fun newGoodsOnClickListener(newGoods: GoodsData) {
+        //safe Args
+        val action = HomeFragmentDirections.actionHomeToDetail(
+            goodsInfo = newGoods
+        )
+        findNavController().navigate(action)
     }
 }
