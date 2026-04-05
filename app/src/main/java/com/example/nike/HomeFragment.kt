@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nike.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +22,7 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +35,29 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 1. 리사이클러뷰는 '데이터의 개수'만큼 틀(XML)을 복사해서 보여준다
+        val productDataList = mutableListOf<ProductData>()
+
+        // xml -> data
+        productDataList.add(ProductData("Air Jordan XXXVI", "US$185", R.drawable.air_jordan))
+
+        // 2. 어댑터 연결
+        val adapter = ProductAdapter(productDataList, onVisitClicked = { })
+
+        // 3. 리사이클러뷰 설정
+        binding.homeProductRv.adapter = adapter
+
+        // 부모 레이아웃이 ConstraintLayout이어도, 리사이클러뷰 내부 배치는
+        // LinearLayoutManager로 세로(Vertical) 정렬하고 있다
+        binding.homeProductRv.layoutManager = LinearLayoutManager(requireContext())
     }
 
     companion object {
