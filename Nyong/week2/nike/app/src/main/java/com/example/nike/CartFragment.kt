@@ -4,36 +4,43 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+// 바인딩 클래스 불러오기
+import com.example.nike.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
 
-    // 포스트잇(프래그먼트)의 화면을 그려주는 핵심 마법 함수입니다!
+    // 프래그먼트용 뷰바인딩 공식 세팅
+    private var _binding: FragmentCartBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // fragment_cart.xml 이라는 도면을 가져와서 화면에 부풀려라(inflate)!
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        // 도면을 부풀려서 번호판에 세팅
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    // 화면(뷰)이 완전히 만들어진 직후에 실행되는 함수
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. 도화지(view)에서 '주문하기' 버튼을 찾아옵니다.
-        val btnOrder = view.findViewById<Button>(R.id.btn_order)
+        // 내 화면의 '주문하기' 버튼 누르기
+        // xml에 있던 btn_order가 카멜 표기법(btnOrder)으로 알아서 바뀝니다
+        binding.btnOrder.setOnClickListener {
 
-        // 2. 버튼이 눌렸을 때 할 일을 정해줍니다.
-        btnOrder.setOnClickListener {
-            // 나를 감싸고 있는 부모 스케치북(Activity)을 불러와서,
-            // 그 스케치북에 있는 하단 탭(bottom_nav)을 찾습니다.
-            val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav)
+            // 부모 스케치북(MainActivity)의 단축 번호판을 빌려오기
+            val mainActivity = requireActivity() as MainActivity
 
-            // 하단 탭의 현재 선택된 아이템을 '구매하기(tab_shop)'로 강제로 바꿔버립니다!
-            bottomNav.selectedItemId = R.id.tab_shop
+            // 부모 번호판(binding)에 있는 하단 탭(bottomNav)을 조종합니다
+            mainActivity.binding.bottomNav.selectedItemId = R.id.tab_shop
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // 메모리 정리를 위해 포스트잇 뗄 때 번호판 비우기
+        _binding = null
     }
 }
