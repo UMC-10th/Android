@@ -1,4 +1,4 @@
-package com.example.nike
+package com.example.nike.data
 
 data class HomeData(
     val image: Int,

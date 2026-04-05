@@ -1,8 +1,10 @@
-package com.example.nike
+package com.example.nike.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nike.data.HomeData
+import com.example.nike.viewholder.HomeViewHolder
 import com.example.nike.databinding.ItemNewestItemBinding
 
 class HomeAdapter(

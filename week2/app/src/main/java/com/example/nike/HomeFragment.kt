@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nike.adapter.HomeAdapter
+import com.example.nike.data.HomeData
 import com.example.nike.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -34,10 +36,17 @@ class HomeFragment : Fragment() {
         // 최신 상품 목록
         val NewestItemsDataList = mutableListOf<HomeData>()
 
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1,"Air Jordan XXXVI", "US$185"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Nike Air Force 1 '07", "US$115"))
+        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Air Jordan XXXVI", "US$185"))
+        NewestItemsDataList.add(
+            HomeData(
+                R.drawable.newest_item_2,
+                "Nike Air Force 1 '07",
+                "US$115"
+            )
+        )
 
-        val adapter = HomeAdapter(NewestItemsDataList,
+        val adapter = HomeAdapter(
+            NewestItemsDataList,
             onVisitClicked = { newestItem ->
                 Toast.makeText(context, "${newestItem.name}구매할까요?", Toast.LENGTH_SHORT).show()
             })

@@ -1,6 +1,7 @@
-package com.example.nike
+package com.example.nike.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nike.data.HomeData
 import com.example.nike.databinding.ItemNewestItemBinding
 
 class HomeViewHolder(val binding: ItemNewestItemBinding) :
