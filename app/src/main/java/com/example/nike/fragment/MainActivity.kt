@@ -1,9 +1,10 @@
-package com.example.nike
+package com.example.nike.fragment
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment // 1. 임포트 필수
-import androidx.navigation.ui.setupWithNavController // 2. 임포트 필수
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.nike.R
 import com.example.nike.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

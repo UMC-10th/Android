@@ -1,4 +1,4 @@
-package com.example.nike
+package com.example.nike.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nike.ProductData
+import com.example.nike.R
+import com.example.nike.adapter.ProductAdapter
 import com.example.nike.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match

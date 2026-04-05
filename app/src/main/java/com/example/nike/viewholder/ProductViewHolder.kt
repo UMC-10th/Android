@@ -1,8 +1,8 @@
-package com.example.nike // 본인 패키지명 확인
+package com.example.nike.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nike.databinding.ItemProductBinding
 import com.example.nike.ProductData
+import com.example.nike.databinding.ItemProductBinding
 
 // 1. 독립된 클래스로 선언 (inner 삭제!)
 class ProductViewHolder(

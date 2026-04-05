@@ -1,8 +1,10 @@
-package com.example.nike
+package com.example.nike.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nike.ProductData
+import com.example.nike.viewholder.ProductViewHolder
 import com.example.nike.databinding.ItemProductBinding
 
 class ProductAdapter(

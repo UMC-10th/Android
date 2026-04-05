@@ -1,11 +1,12 @@
-package com.example.nike
+package com.example.nike.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController // 중요! 네비게이션용 임포트
+import androidx.navigation.fragment.findNavController
+import com.example.nike.R
 import com.example.nike.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
