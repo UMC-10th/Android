@@ -68,6 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/home_new"
+                android:textAppearance="@style/m16_black"
+                android:includeFontPadding="false"
 
                 app:layout_constraintTop_toBottomOf="@id/home_banner_TV"
                 android:layout_marginStart="42dp"
@@ -79,6 +81,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/home_new_sub"
+                android:textAppearance="@style/title_gray"
+                android:includeFontPadding="false"
 
                 app:layout_constraintTop_toBottomOf="@id/home_new_title_TV"
                 android:layout_marginTop="12dp"

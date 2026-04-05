@@ -26,28 +26,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item_purchase_name"
-            android:layout_marginTop="14dp"/>
+            android:layout_marginTop="14dp"
+            android:textAppearance="@style/m14_black"
+            android:includeFontPadding="false"/>
 
         <TextView
             android:id="@+id/item_purchase_detail_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/item_purchase_detail" />
+            android:text="@string/item_purchase_detail"
+            android:textAppearance="@style/r14_gray"
+            android:includeFontPadding="false"/>
 
         <TextView
             android:id="@+id/item_purchase_colours_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/item_purchase_colour" />
+            android:text="@string/item_purchase_colour"
+            android:textAppearance="@style/r14_gray"
+            android:includeFontPadding="false"/>
 
         <TextView
             android:id="@+id/item_purchase_price_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/item_purchase_price" />
+            android:text="@string/item_purchase_price"
+            android:textAppearance="@style/m14_black"
+            android:includeFontPadding="false"/>
     </LinearLayout>
 
     <ImageView

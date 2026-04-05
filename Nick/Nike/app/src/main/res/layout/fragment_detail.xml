@@ -43,7 +43,9 @@
                     android:id="@+id/detail_title_goodsName_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/detail_goodsName"/>
+                    android:text="@string/detail_goodsName"
+                    android:textAppearance="@style/m16_black"
+                    android:includeFontPadding="false"/>
 
                 <Space
                     android:layout_width="0dp"
@@ -83,34 +85,44 @@
                     android:id="@+id/detail_category_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/detail_category"/>
+                    android:text="@string/detail_category"
+                    android:textAppearance="@style/r16_black"
+                    android:includeFontPadding="false"/>
 
                 <TextView
                     android:id="@+id/detail_goodsName_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_name"
-                    android:layout_marginTop="6dp"/>
+                    android:layout_marginTop="6dp"
+                    android:textAppearance="@style/title"
+                    android:includeFontPadding="false"/>
 
                 <TextView
                     android:id="@+id/detail_goodsPrice_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_price"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/m16_black"
+                    android:includeFontPadding="false"/>
 
                 <TextView
                     android:id="@+id/detail_explain_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_explain"
-                    android:layout_marginTop="30dp"/>
+                    android:layout_marginTop="30dp"
+                    android:textAppearance="@style/r16_black"
+                    android:includeFontPadding="false"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/view_product_details"
-                    android:layout_marginTop="30dp"/>
+                    android:layout_marginTop="30dp"
+                    android:textAppearance="@style/r16_gray"
+                    android:includeFontPadding="false"/>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -119,8 +131,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/detail_selectSize_button"
                 android:drawableEnd="@drawable/icon_arrow_down"
-                android:textAppearance="@style/button_white"
-                android:background="@drawable/background_button"
+                android:textAppearance="@style/button_black"
+                android:background="@drawable/background_button_white"
                 android:includeFontPadding="false"
 
                 app:layout_constraintTop_toBottomOf="@id/detail_text_LL"
@@ -150,8 +162,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/detail_addWish_button"
                 android:drawableEnd="@drawable/icon_wish"
-                android:textAppearance="@style/button_white"
-                android:background="@drawable/background_button"
+                android:textAppearance="@style/button_black"
+                android:background="@drawable/background_button_white"
                 android:includeFontPadding="false"
 
                 app:layout_constraintTop_toBottomOf="@id/detail_selectSize_BT"
