@@ -46,6 +46,9 @@ class PurchaseFragment: Fragment(), GoodsRVOnclickListener {
 
     //RV delegate pattern
     override fun goodsOnclickListener(goods: GoodsData) {
-        findNavController().navigate(R.id.action_purchase_to_detail)
+        val action = PurchaseFragmentDirections.actionPurchaseToDetail(
+            goodsInfo = goods
+        )
+        findNavController().navigate(action)
     }
 }

@@ -13,4 +13,13 @@
     <string name="item_purchase_detail">Traning Ankle Socks (6 Pairs)</string>
     <string name="item_purchase_colour">5 Colours</string>
     <string name="item_purchase_price">US$10</string>
+    <string name="detail_goodsName">Name</string>
+    <string name="detail_category">종류</string>
+    <string name="detail_name">상품명</string>
+    <string name="detail_price">가격</string>
+    <string name="detail_explain">설명</string>
+    <string name="view_product_details">View Product Details</string>
+    <string name="detail_addCart_button">장바구니에 추가</string>
+    <string name="detail_addWish_button">위시리스트</string>
+    <string name="detail_selectSize_button">사이즈 선택</string>
 </resources>

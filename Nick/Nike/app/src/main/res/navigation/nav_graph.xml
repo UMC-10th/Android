@@ -53,6 +53,10 @@
         android:id="@+id/goodsDetailFragment"
         android:name="com.clone.nike.ui.purchase.GoodsDetail"
         android:label="제품 상세"
-        tools:layout="@layout/fragment_detail"/>
+        tools:layout="@layout/fragment_detail">
 
+        <argument
+            android:name="goodsInfo"
+            app:argType="com.clone.nike.ui.purchase.GoodsData"/>
+    </fragment>
 </navigation>
