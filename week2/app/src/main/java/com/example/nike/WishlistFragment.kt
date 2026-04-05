@@ -30,6 +30,14 @@ class WishlistFragment : Fragment() {
         val wishlist = mutableListOf<ProductData>()
         wishlist.add(ProductData(R.drawable.product_image, false, "Air Jordan 1 Mid", null, null, "US$125", null))
         wishlist.add(ProductData(R.drawable.product_image, false, "Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)", "5 Colors", "US$10", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Air Max 270", null, "3 Colors", "US$160", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Sportswear Tech Fleece", "Men's Full-Zip Hoodie", null, "US$130", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Dunk Low", "Women's Shoes", "1 Color", "US$115", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Brasilia 9.5", null, null, "US$37", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Air Jordan 1 Low", "Men's Shoes", "4 Colors", "US$110", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Dri-FIT", "Men's Training T-Shirt", "2 Colors", "US$30", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Blazer Mid '77", null, "5 Colors", "US$105", null))
+        wishlist.add(ProductData(R.drawable.product_image, false, "Nike Pegasus 40", "Road Running Shoes", null, "US$130", null))
 
         val productAdapter = ProductAdapter(wishlist,
             onVisitClicked = { wishlistItem ->

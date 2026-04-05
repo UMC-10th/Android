@@ -32,6 +32,16 @@ class AllContentFragment : Fragment() {
         allProductList.add(ProductData(R.drawable.product_image, false, "Nike Elite Crew", "Basketball Socks", "7 Colors", "US$16", false))
         allProductList.add(ProductData(R.drawable.product_image, true, "Nike Air Force 1 '07", "Women's Shoes", "5 Colors", "US$115", false))
         allProductList.add(ProductData(R.drawable.product_image, true, "Jordan ENike Air Force 1 '07ssentials", "Men's Shoes", "2 Colors", "US$115", false))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Nike Air Max 97", "Men's Shoes", "3 Colors", "US$175", true))
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Sportswear Tech Fleece", "Men's Full-Zip Hoodie", "4 Colors", "US$130", false))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Nike Dunk Low Retro", "Men's Shoes", "1 Color", "US$115", true))
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Dri-FIT Adv", "Women's Running Tank", "2 Colors", "US$65", false))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Air Jordan 1 Mid", "Men's Shoes", "8 Colors", "US$125", true))
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Pro Warm", "Men's Long-Sleeve Top", "2 Colors", "US$55", false))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Nike Blazer Mid '77", "Women's Shoes", "5 Colors", "US$105", false))
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Heritage Waistpack", "Bags & Backpacks", "1 Color", "US$25", true))
+        allProductList.add(ProductData(R.drawable.product_image, true, "Nike Pegasus 40", "Men's Road Running Shoes", "6 Colors", "US$130", false))
+        allProductList.add(ProductData(R.drawable.product_image, false, "Nike Peak Beanie", "Hats & Headbands", "3 Colors", "US$28", false))
 
         val productAdapter = ProductAdapter(allProductList,
             onVisitClicked = { checkoutItem ->
