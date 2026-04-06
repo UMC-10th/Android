@@ -6,7 +6,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.nike.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "LIFE_QUIZ"
 
     // 뷰바인딩 단축 번호판 준비
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -32,49 +32,24 @@ class MainActivity : AppCompatActivity() {
         // 생명주기 로그 확인: 태어났다고 기록 남김
         Log.d(TAG, "onCreate")
 
-        // 앱을 맨 처음 켰을 때 '홈' 화면을 기본으로 띄워줍니다.
-        if (savedInstanceState == null) {
-            binding.bottomNav.selectedItemId = R.id.tab_home
-            changeFragment(HomeFragment())
-        }
+        // =========================================================================
+        // 🌟 STEP 4: 내비게이션(NavGraph)과 하단 탭 연결하기
+        // (기존의 changeFragment, setOnItemSelectedListener는 이제 필요 없어서 지웠습니다!)
+        // =========================================================================
 
-        // 하단 탭을 눌렀을 때 화면을 바꿔주는 이벤트 달기
-        binding.bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.tab_home -> {
-                    changeFragment(HomeFragment())
-                    true
-                }
-                R.id.tab_shop -> {
-                    changeFragment(ShopFragment())
-                    true
-                }
-                R.id.tab_wishlist -> {
-                    changeFragment(WishlistFragment())
-                    true
-                }
-                R.id.tab_cart -> {
-                    changeFragment(CartFragment())
-                    true
-                }
-                R.id.tab_profile -> {
-                    changeFragment(ProfileFragment())
-                    true
-                }
-                else -> false
-            }
-        }
+        // 1. 특수 액자(NavHostFragment)에서 내비게이션 조종기(navController)를 찾아옵니다.
+        // (주의: xml 파일의 FragmentContainerView 아이디가 'main_frm'이라고 가정했습니다! ㅇㅇ 맞음.)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_frm) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // 2. 하단 탭(BottomNav)과 조종기를 선으로 연결합니다! (운명 공동체 결성)
+        binding.bottomNav.setupWithNavController(navController)
+
     }
 
-    // 포스트잇(프래그먼트)을 교체해 주는 전용 함수
-    // : 하단 탭(bottomNav)의 아이콘을 누르면 -> changeFragment라는 택시를 불러서 -> main_frm이라는 빈 도화지 공간에 새로운 포스트잇 화면을 덮어 씌워라
-    private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, fragment) // main_frm(빈 공간)에 새 포스트잇을 붙여라!
-            .commit()
-    }
-
-    // 로그 찍기
+    // =========================================================================
+    // 아래는 채령님이 작성하신 생명주기 로그 기록들입니다 (수정 안 함!)
+    // =========================================================================
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart")
