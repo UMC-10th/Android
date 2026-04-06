@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "LIFE_QUIZ"
 
     // 뷰바인딩 단축 번호판 준비
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
