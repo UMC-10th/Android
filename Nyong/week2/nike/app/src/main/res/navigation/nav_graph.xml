@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/tab_home"> <fragment
+    android:id="@+id/tab_home"
+    android:name="com.example.nike.HomeFragment" />
+
+    <fragment
+        android:id="@+id/tab_shop"
+        android:name="com.example.nike.ShopFragment" />
+
+    <fragment
+        android:id="@+id/tab_wishlist"
+        android:name="com.example.nike.WishlistFragment" />
+
+    <fragment
+        android:id="@+id/tab_cart"
+        android:name="com.example.nike.CartFragment" />
+
+    <fragment
+        android:id="@+id/tab_profile"
+        android:name="com.example.nike.ProfileFragment" />
+
+</navigation>
