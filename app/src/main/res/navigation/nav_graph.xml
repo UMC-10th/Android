@@ -24,7 +24,9 @@
 
         <action
             android:id="@+id/action_cartFragment_to_shopFragment"
-            app:destination="@id/shopFragment" />
+            app:destination="@id/shopFragment"
+            app:popUpTo="@id/cartFragment"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
