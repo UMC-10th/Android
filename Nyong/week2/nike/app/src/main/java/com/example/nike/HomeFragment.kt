@@ -5,31 +5,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-// 바인딩 클래스를 불러옵니다! (패키지명.databinding.도면이름Binding)
+import androidx.recyclerview.widget.LinearLayoutManager // 🌟 가로 스크롤을 위한 필수 Import
 import com.example.nike.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    // 1. 메모리 누수를 막기 위한 '임시' 번호판 (_binding)
     private var _binding: FragmentHomeBinding? = null
-
-    // 2. 실제로 편하게 쓸 '진짜' 번호판 (binding)
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // 3. 도면을 부풀려서 번호판에 채워 넣기! (기존 R.layout 방식 대신 바인딩 사용)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        // 4. 완성된 포스트잇 덩어리(root)를 넘겨주기
         return binding.root
+    }
+
+    // 🌟 화면 생성 후 데이터 넣기
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 1. 홈 화면용 더미 데이터
+        val homeDummyList = arrayListOf(
+            ShoeData(R.drawable.img_shoe_1, "Air Jordan XXXVI", "New Release", "1 Colour", "US$185"),
+            ShoeData(R.drawable.img_shoe_2, "Nike Air Force 1", "Best Seller", "3 Colours", "US$115")
+        )
+
+        val shoeAdapter = ShoeAdapter(homeDummyList)
+
+        // 2. 벨트 장착 및 🌟 가로 방향(Horizontal)으로 세팅!
+        binding.rvHome.adapter = shoeAdapter
+        binding.rvHome.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // 5. 포스트잇이 떼어질 때 번호판도 깔끔하게 비워주기 (메모리 관리!)
         _binding = null
     }
 }
