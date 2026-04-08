@@ -4,8 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.clone.nike.databinding.ItemGoodsListBinding
+import com.clone.nike.ui.purchase.GoodsData
 
-class WishRVAdapter(private val wishList: MutableList<WishListData>): RecyclerView.Adapter<WishRVAdapter.WishViewHolder>() {
+class WishRVAdapter(
+    private val wishList: MutableList<GoodsData>,
+    private val wishRVOnclickListener: (GoodsData) -> Unit): RecyclerView.Adapter<WishRVAdapter.WishViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         p1: Int
@@ -19,6 +22,9 @@ class WishRVAdapter(private val wishList: MutableList<WishListData>): RecyclerVi
         position: Int
     ) {
         holder.bind(wishList[position])
+        holder.binding.itemPurchaseLL.setOnClickListener {
+            wishRVOnclickListener(wishList[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -26,7 +32,7 @@ class WishRVAdapter(private val wishList: MutableList<WishListData>): RecyclerVi
     }
 
     inner class WishViewHolder(val binding: ItemGoodsListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(wish: WishListData) {
+        fun bind(wish: GoodsData) {
             binding.apply {
                 itemPurchaseIV.setImageResource(wish.goodsImgResId)
                 itemPurchaseNameTV.text = wish.goodsName

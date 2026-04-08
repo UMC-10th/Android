@@ -34,7 +34,12 @@
         android:id="@+id/wishFragment"
         android:name="com.clone.nike.ui.wish.WishFragment"
         android:label="위시리스트"
-        tools:layout="@layout/fragment_wish"/>
+        tools:layout="@layout/fragment_wish">
+
+        <action
+            android:id="@+id/action_wish_to_detail"
+            app:destination="@id/goodsDetailFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/cartFragment"
