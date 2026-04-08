@@ -31,7 +31,6 @@ class HomeFragment : Fragment(), NewOnclickListener {
 
         //splash에서 title 받아오기
         val title = requireActivity().intent.getStringExtra("title")
-        binding.homeTitleTV.text = title
 
         //뒤로가기 버튼 인식 콜백
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
@@ -43,9 +42,9 @@ class HomeFragment : Fragment(), NewOnclickListener {
         )
 
         //adapter 연결
-        val adapter = NewRVAdapter(newGoodsDataList, this)
-        binding.homeNewRV.adapter = adapter
-        binding.homeNewRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val adapter = HomeRVAdapter(newGoodsDataList, title, this)
+        binding.homeViewRV.adapter = adapter
+        binding.homeViewRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     // 뒤로가기 두번 클릭 시 종료
