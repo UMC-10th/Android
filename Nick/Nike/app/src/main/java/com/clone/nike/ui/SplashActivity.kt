@@ -1,10 +1,11 @@
-package com.clone.nike
+package com.clone.nike.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.clone.nike.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

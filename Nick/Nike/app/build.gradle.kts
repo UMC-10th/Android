@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.androidx.navigation.safeargs)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -32,6 +34,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = false
     }
 
     compileOptions {

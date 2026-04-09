@@ -1,21 +1,21 @@
-package com.clone.nike
+package com.clone.nike.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.clone.nike.databinding.FragmentWishBinding
+import com.clone.nike.databinding.FragmentProfileBinding
 
-class WishFragment: Fragment() {
-    private lateinit var binding: FragmentWishBinding
+class ProfileFragment: Fragment() {
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentWishBinding.inflate(layoutInflater)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
         return binding.root
     }
 }

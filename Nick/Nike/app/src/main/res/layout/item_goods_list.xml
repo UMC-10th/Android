@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="356dp"
+    android:paddingHorizontal="14dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/item_purchase_LL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:orientation="vertical"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_purchase_IV"
+            android:layout_width="184dp"
+            android:layout_height="184dp"
+            android:src="@drawable/image_jordan_xxxvi"/>
+
+        <TextView
+            android:id="@+id/item_purchase_name_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/item_purchase_name"
+            android:layout_marginTop="14dp"
+            android:textAppearance="@style/m14_black"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/item_purchase_detail_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/item_purchase_detail"
+            android:textAppearance="@style/r14_gray"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/item_purchase_colours_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/item_purchase_colour"
+            android:textAppearance="@style/r14_gray"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/item_purchase_price_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/item_purchase_price"
+            android:textAppearance="@style/m14_black"
+            android:includeFontPadding="false"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/item_purchase_addWish_IV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/icon_wish_off"
+        app:layout_constraintEnd_toEndOf="@id/item_purchase_LL"
+        app:layout_constraintTop_toTopOf="@id/item_purchase_LL"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

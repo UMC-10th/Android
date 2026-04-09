@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_new_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/item_new_IV"
+        android:layout_width="314dp"
+        android:layout_height="314dp"
+        android:src="@drawable/image_jordan_xxxvi"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/item_new_IV">
+
+        <TextView
+            android:id="@+id/item_new_name_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/item_new_name"
+            android:layout_marginTop="20dp"
+            android:textAppearance="@style/m14_black"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/item_new_price_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/item_new_price"
+            android:layout_marginTop="16dp"
+
+            android:textAppearance="@style/m14_gray"
+            android:includeFontPadding="false"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
