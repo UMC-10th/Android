@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/item_wish_img_iv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#EBEBEB"
+        android:scaleType="centerCrop"
+        android:src="@drawable/air_jordan"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_wish_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Air Jordan 1 Mid"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_wish_img_iv" />
+
+    <TextView
+        android:id="@+id/item_wish_desc_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Training Ankle Socks"
+        android:textColor="#8D8D8D"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_wish_name_tv" />
+
+    <TextView
+        android:id="@+id/item_wish_colors_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="5 Colours"
+        android:textColor="#8D8D8D"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_wish_desc_tv" />
+
+    <TextView
+        android:id="@+id/item_wish_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="US$125"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_wish_colors_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
