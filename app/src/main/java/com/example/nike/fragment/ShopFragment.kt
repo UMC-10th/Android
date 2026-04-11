@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nike.ProductData
 import com.example.nike.R
-import com.example.nike.adapter.ShopAdapter
+import com.example.nike.adapter.ProductAdapter
+import com.example.nike.adapter.ScreenType // 명찰 임포트 잊지 마!
 import com.example.nike.databinding.FragmentShopBinding
 
 class ShopFragment : Fragment() {
@@ -20,7 +21,6 @@ class ShopFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // 뷰 바인딩 연결
         _binding = FragmentShopBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,37 +28,39 @@ class ShopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. 더미 데이터 리스트 생성
-        // 중요: ProductData(name, price, coverImg, tag) 순서를 반드시 지킬 것!
-        val shopList = arrayListOf(
+        val shopList = mutableListOf(
             ProductData("Nike Air Force 1 '07", "US$115", R.drawable.air_jordan, "BestSeller"),
             ProductData("Nike Everyday Plus", "US$10", R.drawable.air_jordan, ""),
             ProductData("Jordan ENike Air Force", "US$115", R.drawable.air_jordan, "BestSeller"),
             ProductData("Nike Elite Crew", "US$16", R.drawable.air_jordan, ""),
+            ProductData("Nike Everyday Plus", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks (6 Pairs)", "5 Colours", true),
             ProductData("Nike Dunk Low", "US$110", R.drawable.air_jordan, ""),
-            ProductData("Nike Air Max", "US$130", R.drawable.air_jordan, "BestSeller")
+            ProductData("Nike Air Max", "US$130", R.drawable.air_jordan, "BestSeller"),
+            ProductData("Nike Everyday Plus", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks (6 Pairs)", "5 Colours", true),
+
         )
 
-        // 2. 어댑터 초기화 (클릭 리스너 포함)
-        val shopAdapter = ShopAdapter(shopList) { product ->
-            // 아이템 클릭 시 토스트 메시지 출력
-            Toast.makeText(requireContext(), "${product.name} 선택!", Toast.LENGTH_SHORT).show()
-        }
+        // 💡 핵심 에러 해결: 명찰(ScreenType)을 달아주고, 람다 이름 명시!
+        val shopAdapter = ProductAdapter(
+            productList = shopList,
+            screenType = ScreenType.SHOP, // "나 샵 화면이야!"
+            onHeartClicked = { product ->
+                // 나중에 위시리스트 저장 로직 들어갈 곳
+            },
+            onItemClicked = { product ->
+                Toast.makeText(requireContext(), "${product.name} 선택!", Toast.LENGTH_SHORT).show()
+            }
+        )
 
-        // 3. 리사이클러뷰 설정
         binding.shopRecyclerview.apply {
             adapter = shopAdapter
-            // 2단 그리드 레이아웃 설정 (context 대신 requireContext() 권장)
             layoutManager = GridLayoutManager(requireContext(), 2)
-
-            // 성능 최적화를 위해 아이템 크기가 고정임을 알림
-            setHasFixedSize(true)
+            setHasFixedSize(false)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // 메모리 누수 방지를 위해 바인딩 해제
         _binding = null
     }
 }

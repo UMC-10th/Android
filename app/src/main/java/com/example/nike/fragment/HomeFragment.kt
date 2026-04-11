@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nike.ProductData
 import com.example.nike.R
+import com.example.nike.adapter.HomeMainAdapter
 import com.example.nike.adapter.ProductAdapter
 import com.example.nike.databinding.FragmentHomeBinding
 
@@ -46,23 +47,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. 리사이클러뷰는 '데이터의 개수'만큼 틀(XML)을 복사해서 보여준다
+        // 1. 더미 데이터 준비
         val productDataList = mutableListOf<ProductData>()
-
-        // xml -> data
         productDataList.add(ProductData("Air Jordan XXXVI", "US$185", R.drawable.air_jordan))
+        productDataList.add(ProductData("Air Jordan XXXVI", "US$185", R.drawable.air_jordan))
+        productDataList.add(ProductData("Air Jordan XXXVI", "US$185", R.drawable.air_jordan))
+        // (테스트하려면 여기 데이터를 여러 개 더 넣어봐!)
 
-        // 2. 어댑터 연결
-        val adapter = ProductAdapter(productDataList, onVisitClicked = { })
+        // 2. 어댑터 연결 (ProductAdapter가 아니라 HomeMainAdapter를 쓴다!)
+        val mainAdapter = HomeMainAdapter(productDataList, onVisitClicked = { product ->
+            // 클릭 이벤트 처리 (나중에 구현)
+        })
 
         // 3. 리사이클러뷰 설정
-        binding.homeProductRv.adapter = adapter
-
-        // 부모 레이아웃이 ConstraintLayout이어도, 리사이클러뷰 내부 배치는
-        // LinearLayoutManager로 세로(Vertical) 정렬하고 있다
-        binding.homeProductRv.layoutManager = LinearLayoutManager(requireContext())
+        // 주의: 이제 home_product_rv가 아니라 fragment_home.xml에 있는 home_main_rv를 쓴다!
+        binding.homeMainRv.apply {
+            this.adapter = mainAdapter
+            // 부모는 세로 스크롤이니까 그냥 LinearLayoutManager
+            this.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of

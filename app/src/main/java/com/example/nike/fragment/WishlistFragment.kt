@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nike.ProductData
 import com.example.nike.R
-import com.example.nike.adapter.WishlistAdapter
-import com.example.nike.databinding.FragmentWishlistBinding
+import com.example.nike.adapter.ProductAdapter
+import com.example.nike.adapter.ScreenType
+import com.example.nike.databinding.FragmentWishlistBinding // 위시리스트 바인딩
 
 class WishlistFragment : Fragment() {
     private var _binding: FragmentWishlistBinding? = null
@@ -27,23 +28,29 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 시안에 맞춘 더미 데이터 (설명이 없는 데이터와 있는 데이터 혼합)
-        // 주의: ProductData(name, price, coverImg, tag, desc, colors) 순서 확인!
-        val wishList = arrayListOf(
-            ProductData("Air Jordan 1 Mid", "US$125", R.drawable.air_jordan, "", null, null),
-            ProductData("Nike Everyday Plus Cushioned", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks (6 Pairs)", "5 Colours")
+        // 위시리스트니까 하트가 눌려있는(isLiked = true) 데이터라고 가정!
+        val wishlist = mutableListOf(
+            ProductData("Nike Dunk Low", "US$110", R.drawable.air_jordan, "","Training Ankle Socks (6 Pairs)", "5 Colours", isLiked = true),
+            ProductData("Nike Air Max", "US$130", R.drawable.air_jordan, "", isLiked = true)
         )
 
-        // 어댑터 장착
-        val wishAdapter = WishlistAdapter(wishList) { product ->
-            Toast.makeText(requireContext(), "${product.name} 상세 보기", Toast.LENGTH_SHORT).show()
-        }
+        // 💡 샵이랑 다르게 명찰을 WISHLIST로 줌!
+        val wishlistAdapter = ProductAdapter(
+            productList = wishlist,
+            screenType = ScreenType.WISHLIST,
+            onHeartClicked = { product ->
+                // 하트 해제 로직 들어갈 곳
+            },
+            onItemClicked = { product ->
+                Toast.makeText(requireContext(), "${product.name} 확인!", Toast.LENGTH_SHORT).show()
+            }
+        )
 
-        // 2단 그리드 매니저 장착
+        // 리사이클러뷰 아이디는 네 XML에 있는 아이디로 맞춰줘!
         binding.wishlistRecyclerview.apply {
-            adapter = wishAdapter
+            adapter = wishlistAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
-            setHasFixedSize(true)
+            setHasFixedSize(false)
         }
     }
 
