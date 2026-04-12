@@ -54,13 +54,15 @@ class AllContentFragment : Fragment() {
             list,
             onVisitClicked = { checkoutItem ->
                 Toast.makeText(context, "${checkoutItem.name} 구매할까요?", Toast.LENGTH_SHORT).show()
+            },
+            onLikeClicked = { item ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    preferenceManager.toggleLike(item.name)
+                }
             })
 
         binding.checkoutAllProducts.adapter = adapter
-        binding.checkoutAllProducts.layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL, false
-        )
+        binding.checkoutAllProducts.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     private fun createCheckoutDummy(): List<ProductData> {

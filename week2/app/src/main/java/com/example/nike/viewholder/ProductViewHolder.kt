@@ -8,7 +8,7 @@ import com.example.nike.databinding.ItemProductBinding
 
 class ProductViewHolder(val binding: ItemProductBinding) :
 RecyclerView.ViewHolder(binding.root) {
-    fun bind(product: ProductData) {
+    fun bind(product: ProductData, onLikeClicked: (ProductData) -> Unit) {
         binding.productImage.setImageResource(product.image)
         binding.productName.text = product.name
         binding.productPrice.text = product.price
@@ -49,6 +49,10 @@ RecyclerView.ViewHolder(binding.root) {
             binding.btnLike.visibility = View.VISIBLE
             val heartIcon = if (product.isLiked == true) R.drawable.ic_like_fill else R.drawable.ic_like_empty
             binding.btnLike.setImageResource(heartIcon)
+
+            binding.btnLike.setOnClickListener {
+                onLikeClicked(product)
+            }
         }
     }
 }

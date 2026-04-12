@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "nike_prefs")
@@ -21,10 +22,7 @@ class PreferenceManager(private val context: Context) {
         private val HOME_ITEMS_KEY = stringPreferencesKey("home_data_list")
 
         // 구매하기
-        private val CHECKOUT_ITEMS_KEY = stringPreferencesKey("cart_data_list")
-
-        // 위시리스트
-        private val WISHLIST_ITEMS_KEY = stringPreferencesKey("wishlist_data_list")
+        private val CHECKOUT_ITEMS_KEY = stringPreferencesKey("checkout_data_list")
     }
 
     // ====== 홈화면 ======
@@ -64,19 +62,18 @@ class PreferenceManager(private val context: Context) {
     }
 
     // ====== 위시리스트 ======
-    suspend fun saveWishlistDataList(list: List<ProductData>) {
-        val jsonString = gson.toJson(list)
-        context.dataStore.edit { prefs ->
-            prefs[WISHLIST_ITEMS_KEY] = jsonString
-        }
+    val wishlistItemFlow: Flow<List<ProductData>> = checkoutDataListFlow.map { checkoutList ->
+        checkoutList.filter { it.isLiked == true }
     }
-    val wishlistDataListFlow: Flow<List<ProductData>> = context.dataStore.data.map { preferences ->
-        val jsonString = preferences[WISHLIST_ITEMS_KEY] ?: ""
-        if (jsonString.isEmpty()) {
-            emptyList()
-        } else {
-            val type = object : TypeToken<List<ProductData>>() {}.type
-            gson.fromJson(jsonString, type)
+    suspend fun toggleLike(productName: String) {
+        val currentList = checkoutDataListFlow.first()
+        val updatedList = currentList.map { item ->
+            if (item.name == productName) {
+                item.copy(isLiked = !(item.isLiked ?: false))
+            } else {
+                item
+            }
         }
+        saveCheckoutDataList(updatedList)
     }
 }
