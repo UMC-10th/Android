@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
             ShoeData(R.drawable.img_shoe_2, "Nike Air Force 1", "Best Seller", "3 Colours", "US$115")
         )
 
-        val shoeAdapter = ShoeAdapter(homeDummyList)
+        val shoeAdapter = HomeShoeAdapter(homeDummyList)
 
         // 2. 벨트 장착 및 🌟 가로 방향(Horizontal)으로 세팅!
         binding.rvHome.adapter = shoeAdapter
