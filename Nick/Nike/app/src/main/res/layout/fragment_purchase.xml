@@ -3,13 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/purchase_goods_RV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/purchase_tabLayout_TL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="65dp"/>
+    
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/purchase_tabLayout_VP"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

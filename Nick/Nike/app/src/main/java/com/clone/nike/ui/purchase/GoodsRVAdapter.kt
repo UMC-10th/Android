@@ -10,7 +10,8 @@ import com.clone.nike.databinding.ItemGoodsListBinding
 
 class GoodsRVAdapter(
     private var goodsList: MutableList<GoodsData>,
-    private val goodsRVOnclickListener: GoodsRVOnclickListener)
+    private val goodsRVOnclickListener: GoodsRVOnclickListener,
+    private val saveGoodsList: SaveGoodsList)
     : RecyclerView.Adapter<GoodsRVAdapter.GoodsViewHolder>() {
 
         override fun onCreateViewHolder(
@@ -25,17 +26,18 @@ class GoodsRVAdapter(
         holder: GoodsViewHolder,
         position: Int
     ) {
-        val goodsList = goodsList[position]
+        val goods = goodsList[position]
 
         holder.apply {
-            bind(goodsList)
+            bind(goods)
             binding.itemPurchaseAddWishIV.setOnClickListener {
-                goodsRVOnclickListener.wishOnclickListener(goodsList)
-                checkWished(goodsList, binding.itemPurchaseAddWishIV)
+                goodsRVOnclickListener.wishOnclickListener(goods)
+                checkWished(goods, binding.itemPurchaseAddWishIV)
+
+                saveGoodsList.onGoodsListChanged(goodsList)
             }
             binding.itemPurchaseLL.setOnClickListener {
-                goodsRVOnclickListener.goodsOnclickListener(goodsList)
-                checkWished(goodsList, binding.itemPurchaseAddWishIV)
+                goodsRVOnclickListener.goodsOnclickListener(goods)
             }
         }
     }
@@ -71,4 +73,8 @@ class GoodsRVAdapter(
 interface GoodsRVOnclickListener {
     fun wishOnclickListener(goods: GoodsData)
     fun goodsOnclickListener(goods: GoodsData)
+}
+
+interface SaveGoodsList {
+    fun onGoodsListChanged(goodsList: MutableList<GoodsData>)
 }

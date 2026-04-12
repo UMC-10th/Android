@@ -4,13 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.clone.nike.R
 import com.clone.nike.databinding.FragmentPurchaseBinding
+import com.clone.nike.ui.repository.DataStoreRepository
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 
-class PurchaseFragment: Fragment(), GoodsRVOnclickListener {
+class PurchaseFragment: Fragment() {
     private lateinit var binding: FragmentPurchaseBinding
 
     override fun onCreateView(
@@ -25,30 +33,16 @@ class PurchaseFragment: Fragment(), GoodsRVOnclickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //더미 데이터
-        val goodsDataList = mutableListOf(
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",false)
-        )
+        //tabLayout
+        val adapter = GoodsTabAdapter(this)
+        binding.purchaseTabLayoutVP.adapter = adapter
 
-        //adapter 연결 (GridLayoutManager)
-        val adapter = GoodsRVAdapter(goodsDataList,this)
-        binding.purchaseGoodsRV.adapter = adapter
-        binding.purchaseGoodsRV.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-    }
-
-    //RV delegate pattern
-    override fun wishOnclickListener(goods: GoodsData) {
-        goods.isWished = !goods.isWished
-    }
-
-    //RV delegate pattern
-    override fun goodsOnclickListener(goods: GoodsData) {
-        val action = PurchaseFragmentDirections.actionPurchaseToDetail(
-            goodsInfo = goods
-        )
-        findNavController().navigate(action)
+        TabLayoutMediator(binding.purchaseTabLayoutTL, binding.purchaseTabLayoutVP) { tab, position ->
+            tab.text = when (position) {
+                0 -> "전체"
+                1 -> "Top&T-shirts"
+                else -> "sale"
+            }
+        }.attach()
     }
 }

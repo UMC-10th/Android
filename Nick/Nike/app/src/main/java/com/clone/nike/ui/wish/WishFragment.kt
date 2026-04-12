@@ -4,15 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.clone.nike.R
 import com.clone.nike.databinding.FragmentWishBinding
 import com.clone.nike.ui.purchase.GoodsData
+import com.clone.nike.ui.purchase.GoodsRVAdapter
+import com.clone.nike.ui.repository.DataStoreRepository
+import kotlinx.coroutines.launch
 
 class WishFragment: Fragment() {
     private lateinit var binding: FragmentWishBinding
+    val GOODS_DATA = stringPreferencesKey("goods_data")
+    private val repository by lazy {
+        DataStoreRepository(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,14 +35,21 @@ class WishFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //더미 데이터
-        val wishList = mutableListOf(
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10",true),
-            GoodsData(R.drawable.image_nike_everyday_plus_cushioned,"Nike Everyday Plus Cushioned","Traning Ankle Socks (6 Pairs)","5 Colours", "US$10", true)
-        )
+        lifecycleScope.launch {
+            repository.getGoodsInfo(GOODS_DATA).collect { goodsDataString ->
+                val goodsDataList = repository.jsonToGson(goodsDataString)
+                updateRV(goodsDataList)
+            }
+        }
+    }
+
+    fun updateRV(goodsDataList: MutableList<GoodsData>) {
+
+        //goodsList에서 wishList로 변환
+        val wishDataList = goodsDataList.filter { it.isWished }.toMutableList()
 
         //adapter연결 (GridLayoutManager)
-        val adapter = WishRVAdapter(wishList, wishRVOnclickListener = { wishList ->
+        val adapter = WishRVAdapter(wishDataList, wishRVOnclickListener = { wishList ->
             val action = WishFragmentDirections.actionWishToDetail(wishList)
             findNavController().navigate(action)
         })
