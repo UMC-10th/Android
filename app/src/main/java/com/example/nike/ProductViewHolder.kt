@@ -1,10 +1,7 @@
-package com.example.nike.viewholder
+package com.example.nike
 
-import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nike.ProductData
-import com.example.nike.R
 import com.example.nike.adapter.ScreenType
 import com.example.nike.databinding.ItemProductBinding
 
@@ -58,6 +55,12 @@ class ProductViewHolder(
                     binding.productHeartIv.setImageResource(R.drawable.heart)
                 } else {
                     binding.productHeartIv.setImageResource(R.drawable.emptyheart)
+                }
+
+                binding.productHeartIv.setOnClickListener {
+                    onHeartClicked?.invoke(data)
+                    // 여기서 직접 isLiked를 바꾸는 게 아니라,
+                    // 프래그먼트가 DataStore를 수정하도록 신호만 보내는 거야!
                 }
             }
             ScreenType.WISHLIST -> {

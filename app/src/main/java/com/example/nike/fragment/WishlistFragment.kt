@@ -6,16 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.nike.DataManager // 💡 본인 프로젝트 경로에 맞게 임포트!
 import com.example.nike.ProductData
-import com.example.nike.R
 import com.example.nike.adapter.ProductAdapter
 import com.example.nike.adapter.ScreenType
-import com.example.nike.databinding.FragmentWishlistBinding // 위시리스트 바인딩
+import com.example.nike.databinding.FragmentWishlistBinding
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class WishlistFragment : Fragment() {
     private var _binding: FragmentWishlistBinding? = null
     private val binding get() = _binding!!
+
+    // 💡 DataManager 선언
+    private lateinit var dataManager: DataManager
+    private lateinit var wishlistAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,29 +35,49 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 위시리스트니까 하트가 눌려있는(isLiked = true) 데이터라고 가정!
-        val wishlist = mutableListOf(
-            ProductData("Nike Dunk Low", "US$110", R.drawable.air_jordan, "","Training Ankle Socks (6 Pairs)", "5 Colours", isLiked = true),
-            ProductData("Nike Air Max", "US$130", R.drawable.air_jordan, "", isLiked = true)
-        )
+        dataManager = DataManager(requireContext())
 
-        // 💡 샵이랑 다르게 명찰을 WISHLIST로 줌!
-        val wishlistAdapter = ProductAdapter(
-            productList = wishlist,
+        wishlistAdapter = ProductAdapter(
+            productList = mutableListOf(),
             screenType = ScreenType.WISHLIST,
             onHeartClicked = { product ->
-                // 하트 해제 로직 들어갈 곳
+                // 위시리스트에서 하트 누르면 삭제되어야 함
+                removeHeartStatus(product)
             },
             onItemClicked = { product ->
                 Toast.makeText(requireContext(), "${product.name} 확인!", Toast.LENGTH_SHORT).show()
             }
         )
 
-        // 리사이클러뷰 아이디는 네 XML에 있는 아이디로 맞춰줘!
         binding.wishlistRecyclerview.apply {
             adapter = wishlistAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
             setHasFixedSize(false)
+        }
+
+        // 💡 DataStore 실시간 관찰 + 필터링!
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataManager.getProducts().collect { allProducts ->
+                // 전체 상품 중 하트가 눌린(isLiked == true) 상품만 골라내기
+                val likedProducts = allProducts.filter { it.isLiked }
+
+                // 골라낸 리스트만 어댑터에 전달
+                wishlistAdapter.updateData(likedProducts)
+            }
+        }
+    }
+
+    // 💡 하트를 해제하고 DataStore 업데이트하는 함수
+    private fun removeHeartStatus(product: ProductData) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val currentList = dataManager.getProducts().first().toMutableList()
+            val index = currentList.indexOfFirst { it.name == product.name }
+
+            if (index != -1) {
+                // 위시리스트에서는 무조건 false로 변경 (하트 해제)
+                currentList[index].isLiked = false
+                dataManager.saveProducts(currentList)
+            }
         }
     }
 

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nike.ProductData
 import com.example.nike.databinding.ItemProductBinding
-import com.example.nike.viewholder.ProductViewHolder // 💡 밖에 있는 뷰홀더를 불러옴!
+import com.example.nike.ProductViewHolder // 💡 밖에 있는 뷰홀더를 불러옴!
 
 // 💡 Enum 클래스는 어댑터 패키지에 그대로 둠
 enum class ScreenType { HOME, SHOP, WISHLIST }
@@ -29,4 +29,10 @@ class ProductAdapter(
     }
 
     override fun getItemCount(): Int = productList.size
+
+    fun updateData(newList: List<ProductData>) {
+        this.productList.clear()
+        this.productList.addAll(newList)
+        notifyDataSetChanged()
+    }
 }

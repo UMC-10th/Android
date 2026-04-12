@@ -9,5 +9,6 @@ data class ProductData(
     val colors: String? = null,
 
     // 💡 4주차 위시리스트 미션을 위해 추가된 핵심 변수 (반드시 var)
-    var isLiked: Boolean = false
+    var isLiked: Boolean = false,
+    var isInCart: Boolean = false
 )
