@@ -8,7 +8,7 @@ import com.example.nike.databinding.ItemProductBinding
 import com.example.nike.viewholder.ProductViewHolder
 
 class ProductAdapter(
-    private var productList: MutableList<ProductData>,
+    private var productList: List<ProductData>,
     private val onVisitClicked: (ProductData) -> Unit
     ) : RecyclerView.Adapter<ProductViewHolder>() {
 

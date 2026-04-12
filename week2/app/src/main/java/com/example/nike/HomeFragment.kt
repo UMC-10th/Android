@@ -18,6 +18,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +27,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    private lateinit var preferenceManager: PreferenceManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +43,7 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             preferenceManager.homeDataListFlow.collect { savedList ->
                 if (savedList.isEmpty()) {
-                    val dummyData = createDummy()
+                    val dummyData = createHomeDummy()
                     preferenceManager.saveHomeDataList(dummyData)
                 } else {
                     setupRecyclerView(savedList)
@@ -68,7 +67,7 @@ class HomeFragment : Fragment() {
     }
 
     // 더미데이터
-    private fun createDummy(): List<HomeData> {
+    private fun createHomeDummy(): List<HomeData> {
         return mutableListOf<HomeData>().apply {
             add(HomeData(R.drawable.newest_item_1, "Air Jordan XXXVI", "US$185"))
             add(HomeData(R.drawable.newest_item_2, "Nike Air Force 1 '07", "US$115"))
