@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nike.adapter.HomeAdapter
 import com.example.nike.data.HomeData
+import com.example.nike.data.PreferenceManager
 import com.example.nike.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -24,6 +27,8 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private lateinit var preferenceManager: PreferenceManager
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,32 +38,51 @@ class HomeFragment : Fragment() {
             binding.homeTitle.text = titleFromSplash
         }
 
-        // 최신 상품 목록
-        val NewestItemsDataList = mutableListOf<HomeData>()
+        preferenceManager = PreferenceManager(requireContext())
 
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Air Jordan XXXVI", "US$185"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Nike Air Force 1 '07", "US$115"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Nike Air Max 270", "US$160"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Air Jordan 1 Retro High OG", "US$180"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Nike ZoomX Vaporfly Next% 2", "US$250"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Nike Dunk Low Retro", "US$115"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Nike Air VaporMax Plus", "US$210"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Jordan Stay Loyal 2", "US$115"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Nike Pegasus 40", "US$130"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Nike Blazer Mid '77 Vintage", "US$105"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_1, "Nike Air Force 1 React", "US$140"))
-        NewestItemsDataList.add(HomeData(R.drawable.newest_item_2, "Air Jordan 12 Retro", "US$210"))
+        // data store 저장
+        viewLifecycleOwner.lifecycleScope.launch {
+            preferenceManager.homeDataListFlow.collect { savedList ->
+                if (savedList.isEmpty()) {
+                    val dummyData = createDummy()
+                    preferenceManager.saveHomeDataList(dummyData)
+                } else {
+                    setupRecyclerView(savedList)
+                }
+            }
+        }
+    }
 
+    private fun setupRecyclerView(list: List<HomeData>) {
         val adapter = HomeAdapter(
-            NewestItemsDataList,
+            list,
             onVisitClicked = { newestItem ->
-                Toast.makeText(context, "${newestItem.name}구매할까요?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${newestItem.name} 구매할까요?", Toast.LENGTH_SHORT).show()
             })
 
         binding.newestItemsRecyclerView.adapter = adapter
-        binding.newestItemsRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
-            LinearLayoutManager.HORIZONTAL, false)
+        binding.newestItemsRecyclerView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL, false
+        )
+    }
 
+    // 더미데이터
+    private fun createDummy(): List<HomeData> {
+        return mutableListOf<HomeData>().apply {
+            add(HomeData(R.drawable.newest_item_1, "Air Jordan XXXVI", "US$185"))
+            add(HomeData(R.drawable.newest_item_2, "Nike Air Force 1 '07", "US$115"))
+            add(HomeData(R.drawable.newest_item_1, "Nike Air Max 270", "US$160"))
+            add(HomeData(R.drawable.newest_item_2, "Air Jordan 1 Retro High OG", "US$180"))
+            add(HomeData(R.drawable.newest_item_1, "Nike ZoomX Vaporfly Next% 2", "US$250"))
+            add(HomeData(R.drawable.newest_item_2, "Nike Dunk Low Retro", "US$115"))
+            add(HomeData(R.drawable.newest_item_1, "Nike Air VaporMax Plus", "US$210"))
+            add(HomeData(R.drawable.newest_item_2, "Jordan Stay Loyal 2", "US$115"))
+            add(HomeData(R.drawable.newest_item_1, "Nike Pegasus 40", "US$130"))
+            add(HomeData(R.drawable.newest_item_2, "Nike Blazer Mid '77 Vintage", "US$105"))
+            add(HomeData(R.drawable.newest_item_1, "Nike Air Force 1 React", "US$140"))
+            add(HomeData(R.drawable.newest_item_2, "Air Jordan 12 Retro", "US$210"))
+        }
     }
 
     override fun onDestroyView() {
