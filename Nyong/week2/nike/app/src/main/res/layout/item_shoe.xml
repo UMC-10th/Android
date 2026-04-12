@@ -17,6 +17,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:src="@drawable/ic_launcher_background" />
 
+    <ImageButton
+        android:id="@+id/btn_heart"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_heart_off"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="@id/iv_shoe_image"
+        app:layout_constraintEnd_toEndOf="@id/iv_shoe_image" />
+
     <TextView
         android:id="@+id/tv_shoe_name"
         android:layout_width="0dp"
