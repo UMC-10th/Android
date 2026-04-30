@@ -3,6 +3,7 @@ package com.clone.nike.ui.wish
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.clone.nike.R
 import com.clone.nike.databinding.ItemGoodsListBinding
 import com.clone.nike.ui.purchase.GoodsData
 
@@ -39,6 +40,13 @@ class WishRVAdapter(
                 itemPurchaseDetailTV.text = wish.category
                 itemPurchaseColoursTV.text = wish.numberOfColour
                 itemPurchasePriceTV.text = wish.goodsPrice
+
+                if (wish.isWished) {
+                    itemPurchaseAddWishIV.setImageResource(R.drawable.icon_wish_on)
+                }
+                else {
+                    itemPurchaseAddWishIV.setImageResource(R.drawable.icon_wish_off)
+                }
             }
         }
     }
