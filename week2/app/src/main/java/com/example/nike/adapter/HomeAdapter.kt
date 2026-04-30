@@ -8,7 +8,7 @@ import com.example.nike.viewholder.HomeViewHolder
 import com.example.nike.databinding.ItemNewestItemBinding
 
 class HomeAdapter(
-    private var newestItemsList: MutableList<HomeData>,
+    private var newestItemsList: List<HomeData>,
     private val onVisitClicked: (HomeData) -> Unit
 ) : RecyclerView.Adapter<HomeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {

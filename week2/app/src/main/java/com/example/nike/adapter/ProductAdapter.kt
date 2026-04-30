@@ -8,8 +8,9 @@ import com.example.nike.databinding.ItemProductBinding
 import com.example.nike.viewholder.ProductViewHolder
 
 class ProductAdapter(
-    private var productList: MutableList<ProductData>,
-    private val onVisitClicked: (ProductData) -> Unit
+    private var productList: List<ProductData>,
+    private val onVisitClicked: (ProductData) -> Unit,
+    private val onLikeClicked: (ProductData) -> Unit
     ) : RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -27,8 +28,10 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val nowCheckout = productList[position]
-        holder.bind(nowCheckout)
+        val item = productList[position]
+        holder.bind(item) { clickedProduct ->
+            onLikeClicked(clickedProduct)
+        }
     }
 
     override fun getItemCount(): Int {
