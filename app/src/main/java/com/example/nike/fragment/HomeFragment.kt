@@ -1,39 +1,24 @@
 package com.example.nike.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nike.DataManager // DataManager 파일 경로 확인!
 import com.example.nike.ProductData
 import com.example.nike.R
-import com.example.nike.adapter.ProductAdapter
+import com.example.nike.adapter.HomeMainAdapter
 import com.example.nike.databinding.FragmentHomeBinding
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var binding: FragmentHomeBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var dataManager: DataManager
+    private lateinit var mainAdapter: HomeMainAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,40 +31,74 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. 리사이클러뷰는 '데이터의 개수'만큼 틀(XML)을 복사해서 보여준다
-        val productDataList = mutableListOf<ProductData>()
+        // 1. DataManager 초기화 (금고 관리자)
+        dataManager = DataManager(requireContext())
 
-        // xml -> data
-        productDataList.add(ProductData("Air Jordan XXXVI", "US$185", R.drawable.air_jordan))
-
-        // 2. 어댑터 연결
-        val adapter = ProductAdapter(productDataList, onVisitClicked = { })
+        // 2. 어댑터 초기화 (하트 클릭 시 동작할 로직을 람다로 전달)
+        mainAdapter = HomeMainAdapter(
+            productList = mutableListOf(),
+            onVisitClicked = { product ->
+                // 구매하기/상세 페이지 이동 로직 (필요 시 구현)
+            },
+            onHeartClicked = { clickedProduct ->
+                // 하트 버튼 눌렀을 때 실행될 함수 호출
+                updateHeartStatus(clickedProduct)
+            }
+        )
 
         // 3. 리사이클러뷰 설정
-        binding.homeProductRv.adapter = adapter
+        binding.homeMainRv.apply {
+            adapter = mainAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
 
-        // 부모 레이아웃이 ConstraintLayout이어도, 리사이클러뷰 내부 배치는
-        // LinearLayoutManager로 세로(Vertical) 정렬하고 있다
-        binding.homeProductRv.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        // 4. DataStore 실시간 관찰 및 데이터 로드
+        // viewLifecycleOwner.lifecycleScope를 써야 안전하게 비동기 처리가 가능해!
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataManager.getProducts().collect { products ->
+                if (products.isEmpty()) {
+                    saveInitialDummyData() // 최초 1회만 실행됨
+                } else {
+                    mainAdapter.updateData(products) // 모든 변화에 대응
                 }
             }
+        }
+    }
+
+    // [미션 추가] 최초 더미 데이터를 DataStore에 저장하는 함수
+    private fun saveInitialDummyData() {
+        val dummyList = listOf(
+            ProductData("Nike Air Force 1 '07 (White)", "US$115", R.drawable.air_jordan, "BestSeller"),
+            ProductData("Nike Everyday Plus (Pack A)", "US$10", R.drawable.air_jordan, ""),
+            ProductData("Jordan ENike Air Force", "US$115", R.drawable.air_jordan, "BestSeller"),
+            ProductData("Nike Elite Crew (Black)", "US$16", R.drawable.air_jordan, ""),
+            ProductData("Nike Everyday Plus (Pack B)", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks", "5 Colours"),
+            ProductData("Nike Dunk Low (Retro)", "US$110", R.drawable.air_jordan, ""),
+            ProductData("Nike Air Max (97)", "US$130", R.drawable.air_jordan, "BestSeller"),
+            ProductData("Nike Everyday Plus (Pack C)", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks", "5 Colours")
+        )
+        viewLifecycleOwner.lifecycleScope.launch {
+            dataManager.saveProducts(dummyList)
+            // 저장하는 순간 위의 collect가 반응해서 자동으로 화면이 그려질 거야!
+        }
+    }
+
+    // [미션 추가] 하트 클릭 시 DataStore의 데이터를 수정하는 함수
+    private fun updateHeartStatus(product: ProductData) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            // 1. 현재 DataStore에 저장된 최신 리스트를 가져옴
+            val currentList = dataManager.getProducts().first().toMutableList()
+
+            // 2. 클릭한 상품이 리스트의 몇 번째에 있는지 확인
+            val index = currentList.indexOfFirst { it.name == product.name }
+
+            if (index != -1) {
+                // 3. 해당 상품의 하트 상태를 반전시킴
+                currentList[index].isLiked = !currentList[index].isLiked
+
+                // 4. 수정된 전체 리스트를 DataStore에 다시 저장 (덮어쓰기)
+                dataManager.saveProducts(currentList)
+            }
+        }
     }
 }

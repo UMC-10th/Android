@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.androidx.navigation.safeargs)
 
+    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -47,4 +49,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Gson
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Coroutines (비동기 처리를 위해 필요)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Lifecycle (MainActivity에서 lifecycleScope 쓰려면 필요)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+
+
+
 }
