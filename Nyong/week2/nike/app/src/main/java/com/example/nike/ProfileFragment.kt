@@ -128,8 +128,8 @@ class ProfileFragment : Fragment() {
                 if (response.isSuccessful) {
                     val users = response.body()?.data ?: emptyList()
 
-                    // 피그마 예시처럼 팔로잉 3명만 보여주기
-                    val followingUsers = users.take(3)
+                    // 팔로잉 6명 보여주기
+                    val followingUsers = users.take(6)
 
                     // RecyclerView 데이터 갱신
                     followingAdapter.updateUsers(followingUsers)
