@@ -271,7 +271,7 @@
                     android:importantForAccessibility="no"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    android:paddingLeft="24dp"
+                    android:paddingHorizontal="21dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_following" />
 
