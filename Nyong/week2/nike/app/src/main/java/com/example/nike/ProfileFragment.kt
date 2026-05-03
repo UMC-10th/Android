@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
     private lateinit var followingAdapter: FollowingAdapter
 
     // ReqRes에서 발급받은 API Key
-    private val REQRES_API_KEY = "reqres_64014f50bd074eaa96984e53bfa9db8c"
+    private val REQRES_API_KEY = BuildConfig.REQRES_API_KEY
 
     override fun onCreateView(
         inflater: LayoutInflater,
