@@ -1,5 +1,6 @@
 package com.example.nike.viewmodel
 
+import android.R.attr.apiKey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,15 +15,26 @@ class ProfileViewModel(private val repository: ProfileRepository) : ViewModel() 
     private val _profileResult = MutableLiveData<Result<ProfileResponse>>()
     val profileResult: LiveData<Result<ProfileResponse>> = _profileResult
 
+    private val _userListResult = MutableLiveData<Result<List<ProfileResponse>>>()
+    val userListResult: LiveData<Result<List<ProfileResponse>>> = _userListResult
+
     fun fetchProfile(apiKey: String) {
         viewModelScope.launch {
             val result = repository.getUserProfile(apiKey)
             _profileResult.postValue(result)
         }
     }
+
+    fun fetchUserList(apiKey: String) {
+        viewModelScope.launch {
+            val result = repository.getUserList(apiKey)
+            _userListResult.postValue(result)
+        }
+    }
 }
 
-class ProfileViewModelFactory(private val repository: ProfileRepository) : ViewModelProvider.Factory {
+class ProfileViewModelFactory(private val repository: ProfileRepository) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

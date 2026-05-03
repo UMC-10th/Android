@@ -1,6 +1,5 @@
 package com.example.nike.data.repository
 
-import android.util.Log
 import com.example.nike.data.dto.ProfileResponse
 import com.example.nike.data.service.ProfileService
 
@@ -10,7 +9,6 @@ class ProfileRepository(private val service: ProfileService) {
         val response = service.getUserProfile(apiKey)
 
         if (response.isSuccessful) {
-            // 이제 response.body()는 ProfileBaseResponse 타입이므로 .data에 접근 가능합니다.
             val profileData = response.body()?.data
 
             if (profileData != null) {
@@ -25,4 +23,20 @@ class ProfileRepository(private val service: ProfileService) {
         Result.failure(e)
     }
 
+    suspend fun getUserList(apiKey: String): Result<List<ProfileResponse>> = try {
+        val response = service.getUserList(apiKey)
+
+        if (response.isSuccessful) {
+            val userList = response.body()?.data
+            if (userList != null) {
+                Result.success(userList)
+            } else {
+                Result.failure(RuntimeException("데이터가 비어있습니다."))
+            }
+        } else {
+            Result.failure(RuntimeException("목록 조회 실패"))
+        }
+    } catch (e: Exception) {
+        Result.failure(e)
+    }
 }

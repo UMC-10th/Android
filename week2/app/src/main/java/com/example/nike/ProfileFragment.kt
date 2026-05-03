@@ -22,6 +22,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    private val followingAdapter = FollowingAdapter(emptyList())
     private val viewModel: ProfileViewModel by viewModels {
         ProfileViewModelFactory(ProfileRepository(ApiClient.profileService))
     }
@@ -39,13 +40,17 @@ class ProfileFragment : Fragment() {
 
         setupRecyclerView()
         observeProfile()
+        observeUserList()
 
         viewModel.fetchProfile("reqres_5193c564727d460caf02211006d13c9b")
+        viewModel.fetchUserList("reqres_5193c564727d460caf02211006d13c9b")
     }
 
     private fun observeProfile() {
         viewModel.profileResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { data ->
+                Log.d("RETROFIT_CHECK", "데이터 수신 성공")
+
                 binding.nickname.text = data.fullName
 
                 Glide.with(this)
@@ -60,15 +65,18 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun observeUserList() {
+        viewModel.userListResult.observe(viewLifecycleOwner) { result ->
+            result.onSuccess { list ->
+                val newAdapter = FollowingAdapter(list)
+                binding.followingList.adapter = newAdapter
+            }.onFailure { error ->
+                Log.e("RETROFIT", "리스트 로드 실패: ${error.message}")
+            }
+        }
+    }
+
     private fun setupRecyclerView() {
-        val dummyData = listOf(
-            R.drawable.following_1,
-            R.drawable.following_2,
-            R.drawable.following_3,
-            R.drawable.following_4,
-            R.drawable.following_5,
-        )
-        val followingAdapter = FollowingAdapter(dummyData)
         binding.followingList.apply {
             adapter = followingAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
