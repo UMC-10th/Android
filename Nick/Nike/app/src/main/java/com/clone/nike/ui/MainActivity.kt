@@ -3,7 +3,6 @@ package com.clone.nike.ui
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -11,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.clone.nike.R
 import com.clone.nike.databinding.ActivityMainBinding
 import com.clone.nike.ui.purchase.GoodsData
-import com.clone.nike.ui.repository.DataStoreRepository
+import com.clone.nike.repository.repository.DataStoreRepository
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {

@@ -1,10 +1,9 @@
-package com.clone.nike.ui.repository
+package com.clone.nike.repository.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.clone.nike.ui.purchase.GoodsData
 import com.google.gson.Gson

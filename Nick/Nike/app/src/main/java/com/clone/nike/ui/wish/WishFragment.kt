@@ -9,11 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.clone.nike.R
 import com.clone.nike.databinding.FragmentWishBinding
 import com.clone.nike.ui.purchase.GoodsData
-import com.clone.nike.ui.purchase.GoodsRVAdapter
-import com.clone.nike.ui.repository.DataStoreRepository
+import com.clone.nike.repository.repository.DataStoreRepository
 import kotlinx.coroutines.launch
 
 class WishFragment: Fragment() {
