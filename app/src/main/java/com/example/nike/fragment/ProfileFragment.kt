@@ -65,10 +65,14 @@ class ProfileFragment : Fragment() {
             if (response.isSuccessful) {
                 val userList = response.body()?.data
                 if (userList != null) {
-                    // avatar URL만 추출해서 리스트 만들기
+                    // [추가된 부분] 1. 받아온 유저 데이터 리스트의 개수(size)를 구해서 TextView에 덮어씌우기
+                    val followerCount = userList.size
+                    binding.tvFollowingCount.text = "팔로잉 ($followerCount)"
+
+                    // 2. avatar URL만 추출해서 리스트 만들기
                     val avatarList = userList.map { it.avatar }
 
-                    // 리사이클러뷰 세팅
+                    // 3. 리사이클러뷰 세팅
                     setupRecyclerView(avatarList)
                 }
             } else {
