@@ -10,14 +10,10 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.clone.nike.R
 import com.clone.nike.databinding.FragmentHomeBinding
 import com.clone.nike.ui.purchase.GoodsData
-import com.clone.nike.ui.purchase.GoodsRVAdapter
-import com.clone.nike.ui.purchase.PurchaseFragmentDirections
-import com.clone.nike.ui.repository.DataStoreRepository
+import com.clone.nike.repository.repository.DataStoreRepository
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), NewOnclickListener {

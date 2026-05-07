@@ -10,13 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.clone.nike.databinding.FragmentPurchaseAllBinding
-import com.clone.nike.databinding.FragmentPurchaseBinding
 import com.clone.nike.ui.purchase.GoodsData
 import com.clone.nike.ui.purchase.GoodsRVAdapter
 import com.clone.nike.ui.purchase.GoodsRVOnclickListener
 import com.clone.nike.ui.purchase.PurchaseFragmentDirections
 import com.clone.nike.ui.purchase.SaveGoodsList
-import com.clone.nike.ui.repository.DataStoreRepository
+import com.clone.nike.repository.repository.DataStoreRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
