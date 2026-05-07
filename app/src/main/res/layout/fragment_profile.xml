@@ -1,14 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment">
+    android:background="#FFFFFF">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <!-- 프로필 상단 (닉네임 등) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <ImageView
+                android:id="@+id/profile_image_iv"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="centerCrop" />
+            <TextView
+                android:id="@+id/user_nickname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="닉네임"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:drawable/btn_default_small"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="프로필 수정"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- 아이콘 메뉴 바 (주문, 패스 등) -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingTop="20dp" android:paddingBottom="20dp" android:gravity="center_vertical" android:baselineAligned="false">
+
+            <!-- 주문 -->
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="주문" android:textColor="#000000" android:textSize="12sp" android:drawableTop="@drawable/ic_order" android:drawablePadding="8dp"/>
+
+            <!-- 세로 구분선 -->
+            <View android:layout_width="1dp" android:layout_height="30dp" android:background="#E0E0E0"/>
+
+            <!-- 패스 -->
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="패스" android:textColor="#000000" android:textSize="12sp" android:drawableTop="@drawable/ic_pass" android:drawablePadding="8dp"/>
+
+            <!-- 세로 구분선 -->
+            <View android:layout_width="1dp" android:layout_height="30dp" android:background="#E0E0E0"/>
+
+            <!-- 이벤트 -->
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="이벤트" android:textColor="#000000" android:textSize="12sp" android:drawableTop="@drawable/ic_event" android:drawablePadding="8dp"/>
+
+            <!-- 세로 구분선 -->
+            <View android:layout_width="1dp" android:layout_height="30dp" android:background="#E0E0E0"/>
+
+            <!-- 설정 -->
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="설정" android:textColor="#000000" android:textSize="12sp" android:drawableTop="@drawable/ic_settings" android:drawablePadding="8dp"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="10dp" android:background="#F5F5F5" />
+
+        <!-- 멤버 혜택 안내 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="나이키 멤버 혜택" android:textColor="#000000" android:textSize="18sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="＞" />
+        </RelativeLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="10dp" android:background="#F5F5F5" />
+
+        <!-- ★ 팔로잉 리사이클러뷰 섹션 ★ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_following_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="팔로잉 (0)"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- 이 ID가 중요합니다! ProfileFragment.kt에서 binding.rvFollowing으로 부를 아이입니다. -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_following"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:gravity="center"
+            android:padding="40dp"
+            android:text="회원 가입일: 2025년 9월"
+            android:textColor="#AAAAAA" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

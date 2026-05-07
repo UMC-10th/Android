@@ -1,60 +1,97 @@
 package com.example.nike.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.nike.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.nike.ApiClient
+import com.example.nike.adapter.FollowingAdapter
+import com.example.nike.databinding.FragmentProfileBinding
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 코루틴을 통해 비동기로 API 호출
+        viewLifecycleOwner.lifecycleScope.launch {
+            loadUserProfile()
+            loadFollowingList()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    private suspend fun loadUserProfile() {
+        try {
+            // 미션 1: 1번 유저 정보 가져오기 (ApiClient를 통해 통신)
+            val response = ApiClient.reqResService.getUser(1)
+
+            if (response.isSuccessful) {
+                val userData = response.body()?.data
+                if (userData != null) {
+                    // 이름 세팅
+                    binding.userNicknameTv.text = "${userData.firstName} ${userData.lastName}"
+
+                    // 프로필 이미지 세팅 (Glide 사용)
+                    Glide.with(requireContext())
+                        .load(userData.avatar)
+                        .into(binding.profileImageIv)
+                }
+            } else {
+                Log.e("ProfileFragment", "유저 정보 로드 실패: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private suspend fun loadFollowingList() {
+        try {
+            // 미션 2: 팔로잉 리스트(1페이지) 가져오기
+            val response = ApiClient.reqResService.getUserList(1)
+
+            if (response.isSuccessful) {
+                val userList = response.body()?.data
+                if (userList != null) {
+                    // [추가된 부분] 1. 받아온 유저 데이터 리스트의 개수(size)를 구해서 TextView에 덮어씌우기
+                    val followerCount = userList.size
+                    binding.tvFollowingCount.text = "팔로잉 ($followerCount)"
+
+                    // 2. avatar URL만 추출해서 리스트 만들기
+                    val avatarList = userList.map { it.avatar }
+
+                    // 3. 리사이클러뷰 세팅
+                    setupRecyclerView(avatarList)
                 }
+            } else {
+                Log.e("ProfileFragment", "팔로잉 리스트 로드 실패: ${response.code()}")
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun setupRecyclerView(avatars: List<String>) {
+        binding.rvFollowing.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = FollowingAdapter(avatars) // 우리가 만든 어댑터 장착!
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
