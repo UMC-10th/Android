@@ -5,11 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.clone.nike.api.data.response.MyPageResponse
-import com.clone.nike.repository.repository.AuthRepository
+import com.clone.nike.repository.repository.AuthRepositoryImpl
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val repository: AuthRepository): ViewModel() {
+class AuthViewModel(private val repository: AuthRepositoryImpl): ViewModel() {
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
 
@@ -41,7 +40,7 @@ class AuthViewModel(private val repository: AuthRepository): ViewModel() {
 }
 
 class AuthViewModelFactory(
-    private val repository: AuthRepository
+    private val repository: AuthRepositoryImpl
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
