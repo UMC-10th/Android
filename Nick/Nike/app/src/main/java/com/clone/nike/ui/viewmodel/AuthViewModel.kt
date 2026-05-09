@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.clone.nike.repository.remote_repository.AuthRepository
 import com.clone.nike.repository.repository.AuthRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AuthViewModel(private val repository: AuthRepositoryImpl): ViewModel() {
+@HiltViewModel
+class AuthViewModel @Inject constructor(private val repository: AuthRepository): ViewModel() {
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
 
@@ -36,14 +40,5 @@ class AuthViewModel(private val repository: AuthRepositoryImpl): ViewModel() {
 
             _followingImgs.value = res?.map { it.avatar }
         }
-    }
-}
-
-class AuthViewModelFactory(
-    private val repository: AuthRepositoryImpl
-) : ViewModelProvider.Factory {
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AuthViewModel(repository) as T
     }
 }

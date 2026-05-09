@@ -12,17 +12,12 @@ import com.clone.nike.api.retrofit.ApiClient
 import com.clone.nike.databinding.FragmentProfileBinding
 import com.clone.nike.repository.repository.AuthRepositoryImpl
 import com.clone.nike.ui.viewmodel.AuthViewModel
-import com.clone.nike.ui.viewmodel.AuthViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment: Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private val authViewModel: AuthViewModel by viewModels {
-        AuthViewModelFactory(
-            AuthRepositoryImpl(
-                ApiClient.authService
-            )
-        )
-    }
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
