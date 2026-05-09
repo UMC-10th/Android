@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.clone.nike.api.retrofit.ApiClient
 import com.clone.nike.databinding.FragmentProfileBinding
 import com.clone.nike.repository.repository.AuthRepositoryImpl
 import com.clone.nike.ui.viewmodel.AuthViewModel

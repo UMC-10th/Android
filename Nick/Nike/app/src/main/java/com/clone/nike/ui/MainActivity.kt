@@ -11,8 +11,9 @@ import com.clone.nike.R
 import com.clone.nike.databinding.ActivityMainBinding
 import com.clone.nike.ui.purchase.GoodsData
 import com.clone.nike.repository.repository.DataStoreRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
