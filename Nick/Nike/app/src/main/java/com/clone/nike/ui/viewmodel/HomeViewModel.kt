@@ -5,11 +5,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clone.nike.repository.local_repository.DataStoreRepository
+import com.clone.nike.ui.base.BaseViewModel
 import com.clone.nike.ui.purchase.GoodsData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,13 +16,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: DataStoreRepository,
     private val savedStateHandle: SavedStateHandle
-): ViewModel() {
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+): BaseViewModel<HomeUiState>(HomeUiState()) {
 
     val title: String
-
-    val NEW_GOODS_DATA = stringPreferencesKey("new_goods_data")
 
     init {
         viewModelScope.launch {

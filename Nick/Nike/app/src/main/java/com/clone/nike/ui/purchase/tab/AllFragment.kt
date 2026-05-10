@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.clone.nike.databinding.FragmentPurchaseAllBinding
+import com.clone.nike.ui.base.BaseFragment
 import com.clone.nike.ui.purchase.GoodsData
 import com.clone.nike.ui.purchase.GoodsRVAdapter
 import com.clone.nike.ui.purchase.GoodsRVOnclickListener
@@ -20,23 +21,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AllFragment: Fragment(), GoodsRVOnclickListener, SaveGoodsList {
-
-    private lateinit var binding: FragmentPurchaseAllBinding
+class AllFragment: BaseFragment<FragmentPurchaseAllBinding>(FragmentPurchaseAllBinding::inflate), GoodsRVOnclickListener, SaveGoodsList {
     private val viewModel: PurchaseViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPurchaseAllBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView() {
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 if (state.isLoading) {

@@ -5,25 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clone.nike.R
 import com.clone.nike.repository.local_repository.DataStoreRepository
+import com.clone.nike.ui.base.BaseViewModel
 import com.clone.nike.ui.purchase.GoodsData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: DataStoreRepository): ViewModel() {
-    private val _uiState = MutableStateFlow(UiState())
-    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-
-    companion object {
-        val NEW_GOODS_DATA = stringPreferencesKey("new_goods_data")
-        val GOODS_DATA = stringPreferencesKey("goods_data")
-    }
-
+class MainViewModel @Inject constructor(private val repository: DataStoreRepository): BaseViewModel<UiState>(
+    UiState()
+) {
     init {
         fetchNewGoods()
         fetchStandardGoods()
@@ -81,3 +73,4 @@ data class UiState(
     val newGoodsDataList: List<GoodsData> = emptyList(),
     val goodsDataList: List<GoodsData> = emptyList()
 )
+

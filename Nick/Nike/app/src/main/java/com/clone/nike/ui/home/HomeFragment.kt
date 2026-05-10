@@ -12,28 +12,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clone.nike.databinding.FragmentHomeBinding
+import com.clone.nike.ui.base.BaseFragment
 import com.clone.nike.ui.purchase.GoodsData
 import com.clone.nike.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), NewOnclickListener {
-    private lateinit var binding: FragmentHomeBinding
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), NewOnclickListener {
     private val viewModel: HomeViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView() {
         //splash에서 title 받아오기
         val title = viewModel.title
 
