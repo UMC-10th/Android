@@ -37,13 +37,20 @@ class ShopViewModel @Inject constructor(
 
         if (position !in currentList.indices) return
 
-        currentList[position].isLiked = !currentList[position].isLiked
+        val clickedShoe = currentList[position]
+        currentList[position] = clickedShoe.copy(
+            isLiked = !clickedShoe.isLiked
+        )
 
+        // 화면에 먼저 즉시 반영
+        _uiState.update {
+            it.copy(shopShoes = currentList)
+        }
+
+        // DataStore에도 저장
         viewModelScope.launch {
-            // 변경된 구매하기 상품 목록 저장
             localRepository.saveShopShoes(currentList)
 
-            // 좋아요가 true인 상품만 위시리스트로 저장
             val wishlist = ArrayList(currentList.filter { it.isLiked })
             localRepository.saveWishlist(wishlist)
         }
