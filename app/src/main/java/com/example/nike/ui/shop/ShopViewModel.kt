@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.flow.first
 
 @HiltViewModel
 class ShopViewModel @Inject constructor(
@@ -24,7 +25,7 @@ class ShopViewModel @Inject constructor(
 
     fun toggleHeart(product: ProductData) {
         viewModelScope.launch {
-            val currentList = products.value.toMutableList()
+            val currentList = repository.getProducts().first().toMutableList()  // 수정
             val index = currentList.indexOfFirst { it.name == product.name }
             if (index != -1) {
                 currentList[index].isLiked = !currentList[index].isLiked
