@@ -15,4 +15,10 @@ abstract class RepositoryModule {
     abstract fun bindRemoteRepository(
         impl: RemoteRepositoryImpl
     ): RemoteRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindLocalRepository(
+        impl: LocalRepositoryImpl
+    ): LocalRepository
 }
