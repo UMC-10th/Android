@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,20 +16,18 @@ import com.clone.nike.ui.purchase.GoodsRVAdapter
 import com.clone.nike.ui.purchase.GoodsRVOnclickListener
 import com.clone.nike.ui.purchase.PurchaseFragmentDirections
 import com.clone.nike.ui.purchase.SaveGoodsList
-import com.clone.nike.repository.repository.DataStoreRepository
+import com.clone.nike.ui.purchase.PurchaseViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AllFragment: Fragment(), GoodsRVOnclickListener, SaveGoodsList {
 
     private lateinit var binding: FragmentPurchaseAllBinding
-    val GOODS_DATA = stringPreferencesKey("goods_data")
-
-    private val repository by lazy {
-        DataStoreRepository(requireContext())
-    }
+    private val viewModel: PurchaseViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,26 +42,17 @@ class AllFragment: Fragment(), GoodsRVOnclickListener, SaveGoodsList {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            repository.getGoodsInfo(GOODS_DATA)
-                .onStart {
-                    //RV를 숨기고 ProgressBar를 표시해 로딩화면 구현
+            viewModel.uiState.collect { state ->
+                if (state.isLoading) {
                     binding.purchaseProgressBarPB.visibility = View.VISIBLE
                     binding.purchaseGoodsRV.visibility = View.GONE
-                }
-                .catch {
-                    binding.purchaseProgressBarPB.visibility = View.GONE
-                    binding.purchaseGoodsRV.visibility = View.VISIBLE
-                }
-                .collect { goodsDataString ->
-                    //로딩화면 구현을 위해 일부로 딜레이
-                    delay(1000)
-
-                    val goodsDataList = repository.jsonToGson(goodsDataString)
-                    updateRV(goodsDataList)
+                } else {
+                    updateRV(state.goodsDataList.toMutableList())
 
                     binding.purchaseProgressBarPB.visibility = View.GONE
                     binding.purchaseGoodsRV.visibility = View.VISIBLE
                 }
+            }
         }
     }
 
@@ -81,7 +71,7 @@ class AllFragment: Fragment(), GoodsRVOnclickListener, SaveGoodsList {
 
     override fun onGoodsListChanged(goodsList: MutableList<GoodsData>) {
         lifecycleScope.launch {
-            repository.saveGoodsInfo(goodsList, GOODS_DATA)
+            viewModel.saveGoodsInfo(goodsList)
         }
     }
 

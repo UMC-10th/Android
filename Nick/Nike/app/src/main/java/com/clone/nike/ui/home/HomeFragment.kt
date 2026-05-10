@@ -8,20 +8,19 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clone.nike.databinding.FragmentHomeBinding
 import com.clone.nike.ui.purchase.GoodsData
-import com.clone.nike.repository.repository.DataStoreRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), NewOnclickListener {
     private lateinit var binding: FragmentHomeBinding
-    val NEW_GOODS_DATA = stringPreferencesKey("new_goods_data")
-    private val repository by lazy {
-        DataStoreRepository(requireContext())
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,15 +35,15 @@ class HomeFragment : Fragment(), NewOnclickListener {
         super.onViewCreated(view, savedInstanceState)
 
         //splash에서 title 받아오기
-        val title = requireActivity().intent.getStringExtra("title")
+        val title = viewModel.title
 
         //뒤로가기 버튼 인식 콜백
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
 
         lifecycleScope.launch {
-            repository.getGoodsInfo(NEW_GOODS_DATA).collect { goodsDataString ->
-                val goodsDataList = repository.jsonToGson(goodsDataString)
-                updateRV(goodsDataList, title)
+            viewModel.uiState.collect { state ->
+                val list = state.goodsDataList.toMutableList()
+                updateRV(list, title)
             }
         }
     }

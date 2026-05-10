@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.clone.nike.databinding.FragmentPurchaseAllBinding
 import com.clone.nike.databinding.FragmentPurchaseSaleBinding
 import com.clone.nike.databinding.FragmentPurchaseTopBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TopFragment: Fragment() {
     private lateinit var binding: FragmentPurchaseTopBinding
 
