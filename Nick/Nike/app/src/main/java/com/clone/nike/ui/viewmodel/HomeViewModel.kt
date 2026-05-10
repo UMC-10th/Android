@@ -1,4 +1,4 @@
-package com.clone.nike.ui.home
+package com.clone.nike.ui.viewmodel
 
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.SavedStateHandle

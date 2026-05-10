@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,11 +15,8 @@ import com.clone.nike.ui.purchase.GoodsRVAdapter
 import com.clone.nike.ui.purchase.GoodsRVOnclickListener
 import com.clone.nike.ui.purchase.PurchaseFragmentDirections
 import com.clone.nike.ui.purchase.SaveGoodsList
-import com.clone.nike.ui.purchase.PurchaseViewModel
+import com.clone.nike.ui.viewmodel.PurchaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

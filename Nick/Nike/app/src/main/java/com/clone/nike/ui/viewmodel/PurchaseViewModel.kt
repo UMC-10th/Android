@@ -1,18 +1,15 @@
-package com.clone.nike.ui.purchase
+package com.clone.nike.ui.viewmodel
 
-import android.view.View
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clone.nike.repository.local_repository.DataStoreRepository
-import com.clone.nike.ui.home.HomeUiState
+import com.clone.nike.ui.purchase.GoodsData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject

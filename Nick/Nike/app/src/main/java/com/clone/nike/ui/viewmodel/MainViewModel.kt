@@ -1,13 +1,11 @@
-package com.clone.nike.ui
+package com.clone.nike.ui.viewmodel
 
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.clone.nike.R
 import com.clone.nike.repository.local_repository.DataStoreRepository
 import com.clone.nike.ui.purchase.GoodsData
-import com.clone.nike.ui.wish.WishUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
