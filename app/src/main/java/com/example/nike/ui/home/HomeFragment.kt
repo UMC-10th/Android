@@ -1,4 +1,4 @@
-package com.example.nike.fragment
+package com.example.nike.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.nike.DataManager // DataManager 파일 경로 확인!
-import com.example.nike.ProductData
+import com.example.nike.DataManager
+import com.example.nike.data.model.ProductData
 import com.example.nike.R
 import com.example.nike.adapter.HomeMainAdapter
 import com.example.nike.databinding.FragmentHomeBinding
@@ -68,14 +68,33 @@ class HomeFragment : Fragment() {
     // [미션 추가] 최초 더미 데이터를 DataStore에 저장하는 함수
     private fun saveInitialDummyData() {
         val dummyList = listOf(
-            ProductData("Nike Air Force 1 '07 (White)", "US$115", R.drawable.air_jordan, "BestSeller"),
+            ProductData(
+                "Nike Air Force 1 '07 (White)",
+                "US$115",
+                R.drawable.air_jordan,
+                "BestSeller"
+            ),
             ProductData("Nike Everyday Plus (Pack A)", "US$10", R.drawable.air_jordan, ""),
             ProductData("Jordan ENike Air Force", "US$115", R.drawable.air_jordan, "BestSeller"),
             ProductData("Nike Elite Crew (Black)", "US$16", R.drawable.air_jordan, ""),
-            ProductData("Nike Everyday Plus (Pack B)", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks", "5 Colours"),
+            ProductData(
+                "Nike Everyday Plus (Pack B)",
+                "US$10",
+                R.drawable.air_jordan,
+                "",
+                "Training Ankle Socks",
+                "5 Colours"
+            ),
             ProductData("Nike Dunk Low (Retro)", "US$110", R.drawable.air_jordan, ""),
             ProductData("Nike Air Max (97)", "US$130", R.drawable.air_jordan, "BestSeller"),
-            ProductData("Nike Everyday Plus (Pack C)", "US$10", R.drawable.air_jordan, "", "Training Ankle Socks", "5 Colours")
+            ProductData(
+                "Nike Everyday Plus (Pack C)",
+                "US$10",
+                R.drawable.air_jordan,
+                "",
+                "Training Ankle Socks",
+                "5 Colours"
+            )
         )
         viewLifecycleOwner.lifecycleScope.launch {
             dataManager.saveProducts(dummyList)

@@ -3,6 +3,7 @@ package com.example.nike
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nike.adapter.ScreenType
+import com.example.nike.data.model.ProductData
 import com.example.nike.databinding.ItemProductBinding
 
 class ProductViewHolder(
@@ -71,7 +72,6 @@ class ProductViewHolder(
         }
 
         // 클릭 이벤트 연결
-        binding.productHeartIv.setOnClickListener { onHeartClicked?.invoke(data) }
         binding.root.setOnClickListener { onItemClicked?.invoke(data) }
     }
 }

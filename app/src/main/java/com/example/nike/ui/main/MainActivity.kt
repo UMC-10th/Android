@@ -1,4 +1,4 @@
-package com.example.nike.fragment
+package com.example.nike.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.nike.R
 import com.example.nike.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint  // 이 줄 추가
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

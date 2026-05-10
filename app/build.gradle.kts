@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.androidx.navigation.safeargs)
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 // ★ 핵심 포인트: android 블록에 들어가기 '전'에 미리 파일을 읽어서 변수로 만들어 둡니다. (전역 변수 느낌)
@@ -77,4 +78,14 @@ dependencies {
 
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("com.google.dagger:hilt-android:2.59.2")
+    ksp("com.google.dagger:hilt-android-compiler:2.59.2")
+
+    implementation("androidx.room:room-runtime:2.7.1")
+    implementation("androidx.room:room-ktx:2.7.1")
+    ksp("androidx.room:room-compiler:2.7.1")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+
 }

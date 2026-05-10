@@ -1,4 +1,4 @@
-package com.example.nike.fragment
+package com.example.nike.ui.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater

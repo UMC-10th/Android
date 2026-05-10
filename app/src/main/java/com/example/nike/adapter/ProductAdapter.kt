@@ -3,7 +3,7 @@ package com.example.nike.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nike.ProductData
+import com.example.nike.data.model.ProductData
 import com.example.nike.databinding.ItemProductBinding
 import com.example.nike.ProductViewHolder // 💡 밖에 있는 뷰홀더를 불러옴!
 

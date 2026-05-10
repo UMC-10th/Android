@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nike.ProductData
+import com.example.nike.data.model.ProductData
 import com.example.nike.databinding.ItemHomeHeaderBinding
 
 class HomeMainAdapter(

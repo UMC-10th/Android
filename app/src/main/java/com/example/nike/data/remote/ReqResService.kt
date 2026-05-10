@@ -1,5 +1,7 @@
-package com.example.nike
+package com.example.nike.data.remote
 
+import com.example.nike.data.model.SingleUserResponse
+import com.example.nike.data.model.UserListResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
