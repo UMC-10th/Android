@@ -13,9 +13,9 @@ class HomeRepository @Inject constructor(
     val homeDataList: Flow<List<HomeData>> = localDataSource.homeDataListFlow
 
     suspend fun initHomeDataIfEmpty() {
-        val current = localDataSource.homeDataListFlow.first()  // ← 여기
+        val current = localDataSource.homeDataListFlow.first()
         if (current.isEmpty()) {
-            localDataSource.saveHomeDataList(createDummy())     // ← 여기
+            localDataSource.saveHomeDataList(createDummy())
         }
     }
 
