@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.nike.HomeFragment"
+        android:name="com.example.nike.presentation.home.HomeFragment"
         android:label="홈"
         tools:layout="@layout/fragment_home">
 
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/checkoutFragment"
-        android:name="com.example.nike.CheckoutFragment"
+        android:name="com.example.nike.presentation.checkout.CheckoutFragment"
         android:label="구매하기"
         tools:layout="@layout/fragment_checkout">
 
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.nike.WishlistFragment"
+        android:name="com.example.nike.presentation.wishlist.WishlistFragment"
         android:label="위시리스트"
         tools:layout="@layout/fragment_wishlist">
 
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.nike.CartFragment"
+        android:name="com.example.nike.presentation.cart.CartFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_cart">
 
@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.nike.ProfileFragment"
+        android:name="com.example.nike.presentation.profile.ProfileFragment"
         android:label="프로필"
         tools:layout="@layout/fragment_profile">
 
