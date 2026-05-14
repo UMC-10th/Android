@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.nike.fragment.HomeFragment"
+        android:name="com.example.nike.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.example.nike.fragment.ShopFragment"
+        android:name="com.example.nike.ui.shop.ShopFragment"
         android:label="fragment_shop"
         tools:layout="@layout/fragment_shop" />
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.nike.fragment.CartFragment"
+        android:name="com.example.nike.ui.cart.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
 
@@ -32,12 +32,12 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.nike.fragment.ProfileFragment"
+        android:name="com.example.nike.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.nike.fragment.WishlistFragment"
+        android:name="com.example.nike.ui.wishlist.WishlistFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" />
 </navigation>

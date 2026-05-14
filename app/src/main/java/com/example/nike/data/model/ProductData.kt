@@ -1,4 +1,4 @@
-package com.example.nike
+package com.example.nike.data.model
 
 data class ProductData(
     val name: String,           // Air Jordan XXXVI

@@ -1,4 +1,4 @@
-package com.example.nike
+package com.example.nike.data.model
 
 import com.google.gson.annotations.SerializedName
 
