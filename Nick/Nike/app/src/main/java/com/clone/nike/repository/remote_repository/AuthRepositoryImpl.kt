@@ -3,9 +3,11 @@ package com.clone.nike.repository.repository
 import android.util.Log
 import com.clone.nike.api.data.response.MyPageResponse
 import com.clone.nike.api.DTO.AuthService
+import com.clone.nike.repository.remote_repository.AuthRepository
+import javax.inject.Inject
 
-class AuthRepository(private val service: AuthService) {
-    suspend fun getFollowingProfile(page: Int, req: String): List<MyPageResponse>? {
+class AuthRepositoryImpl @Inject constructor(private val service: AuthService): AuthRepository {
+    override suspend fun getFollowingProfile(page: Int, req: String): List<MyPageResponse>? {
         val res = service.getMyPageData(page,req)
         if (res.isSuccessful) {
             return res.body()?.data
@@ -14,7 +16,7 @@ class AuthRepository(private val service: AuthService) {
         }
         return null
     }
-    suspend fun getUserProfile(page: Int, req: String): MyPageResponse? {
+    override suspend fun getUserProfile(page: Int, req: String): MyPageResponse? {
         val list = getFollowingProfile(page, req)
         val userProfile = list?.find { it.id == 1 }
 

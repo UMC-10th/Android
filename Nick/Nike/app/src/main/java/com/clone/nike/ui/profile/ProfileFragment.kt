@@ -6,41 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.clone.nike.api.DTO.AuthService
-import com.clone.nike.api.retrofit.ApiClient
 import com.clone.nike.databinding.FragmentProfileBinding
-import com.clone.nike.repository.repository.AuthRepository
-import com.clone.nike.repository.repository.DataStoreRepository
+import com.clone.nike.ui.base.BaseFragment
 import com.clone.nike.ui.viewmodel.AuthViewModel
-import com.clone.nike.ui.viewmodel.AuthViewModelFactory
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
-class ProfileFragment: Fragment() {
-    private lateinit var binding: FragmentProfileBinding
-    private val authViewModel: AuthViewModel by viewModels {
-        AuthViewModelFactory(
-            AuthRepository(
-                ApiClient.authService
-            )
-        )
-    }
+@AndroidEntryPoint
+class ProfileFragment: BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
+    private val authViewModel: AuthViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentProfileBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView() {
         authViewModel.loadFollowing(1, "reqres_08962a9022be4a3499d4dbe5e1bbc482")
         authViewModel.loadProfile(1,"reqres_08962a9022be4a3499d4dbe5e1bbc482")
 

@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.clone.nike.databinding.FragmentPurchaseAllBinding
 import com.clone.nike.databinding.FragmentPurchaseSaleBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SaleFragment: Fragment() {
     private lateinit var binding: FragmentPurchaseSaleBinding
 

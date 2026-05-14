@@ -7,30 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.clone.nike.R
 import com.clone.nike.databinding.FragmentCartBinding
+import com.clone.nike.ui.base.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class CartFragment: Fragment() {
-    private lateinit var binding: FragmentCartBinding
+class CartFragment: BaseFragment<FragmentCartBinding>(FragmentCartBinding::inflate) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCartBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView() {
         //버튼 클릭 시 이동
         binding.cartOrderBT.setOnClickListener {
             requireActivity()
                 .findViewById<BottomNavigationView>(R.id.main_bottomNav)
                 .selectedItemId = R.id.purchaseFragment
-
-//            findNavController().navigate(R.id.action_cart_to_purchase)
         }
     }
 }

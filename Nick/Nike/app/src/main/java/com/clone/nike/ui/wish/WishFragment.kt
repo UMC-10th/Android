@@ -4,22 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.clone.nike.databinding.FragmentWishBinding
 import com.clone.nike.ui.purchase.GoodsData
-import com.clone.nike.repository.repository.DataStoreRepository
+import com.clone.nike.ui.viewmodel.WishViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class WishFragment: Fragment() {
     private lateinit var binding: FragmentWishBinding
-    val GOODS_DATA = stringPreferencesKey("goods_data")
-    private val repository by lazy {
-        DataStoreRepository(requireContext())
-    }
+    private val viewModel: WishViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,17 +33,14 @@ class WishFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            repository.getGoodsInfo(GOODS_DATA).collect { goodsDataString ->
-                val goodsDataList = repository.jsonToGson(goodsDataString)
-                updateRV(goodsDataList)
+            viewModel.uiState.collect { state ->
+                updateRV(state.goodsDataList.toMutableList())
             }
         }
     }
 
     fun updateRV(goodsDataList: MutableList<GoodsData>) {
-
-        //goodsList에서 wishList로 변환
-        val wishDataList = goodsDataList.filter { it.isWished }.toMutableList()
+        val wishDataList = viewModel.listFilter(goodsDataList)
 
         //adapter연결 (GridLayoutManager)
         val adapter = WishRVAdapter(wishDataList, wishRVOnclickListener = { wishList ->
