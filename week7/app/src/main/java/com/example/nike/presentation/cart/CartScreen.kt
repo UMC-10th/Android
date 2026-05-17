@@ -28,15 +28,18 @@ import com.example.nike.core.designsystem.theme.NikeTheme
 @Composable
 fun CartRoute(
     modifier: Modifier = Modifier,
+    onOrderClick: () -> Unit
 ) {
     CartScreen(
         modifier = modifier,
+        onClick = onOrderClick
     )
 }
 
 @Composable
 private fun CartScreen(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -59,7 +62,7 @@ private fun CartScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            onClick = {},
+            onClick = onClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
@@ -81,6 +84,8 @@ private fun CartScreen(
 @Composable
 private fun CartScreenPreview() {
     NikeTheme {
-        CartScreen()
+        CartScreen(
+            onClick = {}
+        )
     }
 }

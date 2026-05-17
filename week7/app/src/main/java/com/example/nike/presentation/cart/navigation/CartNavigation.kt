@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import com.example.nike.core.extension.clearBackStackNavOptions
 import com.example.nike.core.navigation.MainTabRoute
 import com.example.nike.presentation.cart.CartRoute
+import com.example.nike.presentation.purchase.navigation.Purchase
+import com.example.nike.presentation.purchase.navigation.navigateToPurchase
 import kotlinx.serialization.Serializable
 
 fun NavController.navigateToCart(
@@ -27,7 +29,8 @@ fun NavGraphBuilder.cartGraph(
 ) {
     composable<Cart> {
         CartRoute (
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            onOrderClick = { navController.navigateToPurchase() }
         )
     }
 }
