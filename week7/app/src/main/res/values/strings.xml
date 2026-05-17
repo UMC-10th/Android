@@ -6,4 +6,7 @@
     <string name="nav_wishlist">위시리스트</string>
     <string name="nav_cart">장바구니</string>
     <string name="nav_profile">프로필</string>
+    <!-- Cart -->
+    <string name="cart_empty">장바구니가 비어있습니다.\n제품을 추가하면 여기에 표시됩니다.</string>
+    <string name="cart_btn">주문하기</string>
 </resources>
