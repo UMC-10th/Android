@@ -1,6 +1,5 @@
-package com.example.composeapplication.data
+package com.example.composeapplication.data.navigation
 
-import androidx.annotation.DrawableRes
 import com.example.composeapplication.R
 import kotlinx.serialization.Serializable
 
