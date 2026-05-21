@@ -1,5 +1,6 @@
 package com.clone.nike.ui.profile
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.clone.nike.BuildConfig
 import com.clone.nike.databinding.FragmentProfileBinding
 import com.clone.nike.ui.base.BaseFragment
 import com.clone.nike.ui.viewmodel.AuthViewModel
@@ -18,8 +20,8 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(FragmentProfileBindi
     private val authViewModel: AuthViewModel by viewModels()
 
     override fun initView() {
-        authViewModel.loadFollowing(1, "reqres_08962a9022be4a3499d4dbe5e1bbc482")
-        authViewModel.loadProfile(1,"reqres_08962a9022be4a3499d4dbe5e1bbc482")
+        authViewModel.loadFollowing(1, BuildConfig.API_KEY)
+        authViewModel.loadProfile(1,BuildConfig.API_KEY)
 
         authViewModel.name.observe(viewLifecycleOwner) { name ->
             binding.myPageNickNameTV.text = name
