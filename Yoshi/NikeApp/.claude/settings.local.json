@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(& \"C:\\\\Users\\\\doyeo\\\\AndroidStudioProjects\\\\NikeApp\\\\gradlew.bat\" assembleDebug 2>&1)"
+      "PowerShell(& \"C:\\\\Users\\\\doyeo\\\\AndroidStudioProjects\\\\NikeApp\\\\gradlew.bat\" assembleDebug 2>&1)",
+      "Bash(./gradlew.bat :app:compileDebugKotlin --console=plain)"
     ]
   }
 }
