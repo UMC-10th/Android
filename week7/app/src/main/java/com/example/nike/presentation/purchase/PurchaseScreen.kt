@@ -1,15 +1,20 @@
 package com.example.nike.presentation.purchase
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import com.example.nike.core.designsystem.theme.NikeTheme
+import com.example.nike.presentation.purchase.component.PurchaseTabRow
+import com.example.nike.presentation.purchase.tabscreen.AllTabScreen
+import com.example.nike.presentation.purchase.tabscreen.SaleTabScreen
+import com.example.nike.presentation.purchase.tabscreen.TopsTabScreen
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun PurchaseRoute(
@@ -24,15 +29,25 @@ fun PurchaseRoute(
 private fun PurchaseScreen(
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = "구매하기 화면",
-            color = Color.Black,
-            fontSize = 20.sp
-        )
+    val pagerState: PagerState = rememberPagerState(pageCount = {3})
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
+
+    Column(
+        modifier = modifier
+            .fillMaxSize(),
+    ){
+        PurchaseTabRow(pagerState, coroutineScope)
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+            when (page) {
+                0 -> AllTabScreen()
+                1 -> TopsTabScreen()
+                2 -> SaleTabScreen()
+            }
+        }
     }
 }
 

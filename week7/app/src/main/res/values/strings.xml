@@ -11,6 +11,10 @@
     <string name="home_date">9월 4일 목요일</string>
     <string name="home_newest_sub_title">"What's new"</string>
     <string name="home_newest_title">나이키 최신 상품</string>
+    <!-- Purchase -->
+    <string name="purchase_tab_all">전체</string>
+    <string name="purchase_tab_tops">Tops&amp;T-Shirts</string>
+    <string name="purchase_tab_sale">sale</string>
     <!-- Cart -->
     <string name="cart_empty">장바구니가 비어있습니다.\n제품을 추가하면 여기에 표시됩니다.</string>
     <string name="cart_btn">주문하기</string>
