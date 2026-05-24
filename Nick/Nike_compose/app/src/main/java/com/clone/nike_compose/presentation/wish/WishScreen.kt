@@ -89,7 +89,7 @@ fun WishGridList(
 
 @Composable
 fun WishGoodsItem(goods: Goods) {
-    Column() {
+    Column {
         Box {
             Image(
                 painter = painterResource(goods.goodsImgResId),

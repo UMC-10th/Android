@@ -47,60 +47,60 @@ class MainActivity : ComponentActivity() {
 val sampleNewGoods = listOf(
     Goods(
         goodsId = 1,
-        goodsName = "Nike Air Max",
-        goodsPrice = "199,000원",
+        goodsName = "Jordan XXXVI",
+        goodsPrice = "US$185",
         category = "",
         numberOfColour = "",
         isWished = false,
-        goodsImgResId = R.drawable.image_home_banner
+        goodsImgResId = R.drawable.image_jordan_xxxvi
     ),
     Goods(
         goodsId = 2,
-        goodsName = "Nike Jordan",
-        goodsPrice = "239,000원",
+        goodsName = "Air Force 1",
+        goodsPrice = "US$115",
         category = "",
         numberOfColour = "",
         isWished = false,
-        goodsImgResId = R.drawable.image_home_banner
+        goodsImgResId = R.drawable.image_air_force_1
     )
 )
 
 val sampleGoods = listOf(
     Goods(
         goodsId = 1,
-        goodsName = "Nike Air Max",
-        goodsPrice = "199,000원",
-        category = "",
-        numberOfColour = "",
+        goodsName = "Nike Everyday Plus Cushioned",
+        goodsPrice = "US$10",
+        category = "Training Ankle Socks (6 Pairs)",
+        numberOfColour = "5 Colours",
         isWished = false,
-        goodsImgResId = R.drawable.image_home_banner
+        goodsImgResId = R.drawable.image_nike_everyday_plus_cushioned
     ),
     Goods(
         goodsId = 2,
-        goodsName = "Nike Jordan",
-        goodsPrice = "239,000원",
-        category = "",
-        numberOfColour = "",
+        goodsName = "Jordan ENike Air Force 1 '07ssentials",
+        goodsPrice = "US$115",
+        category = "Men's shoes",
+        numberOfColour = "2 Colours",
         isWished = false,
-        goodsImgResId = R.drawable.image_home_banner
+        goodsImgResId = R.drawable.image_jordan_enike
     ),
     Goods(
         goodsId = 3,
-        goodsName = "Nike Jordan",
-        goodsPrice = "239,000원",
-        category = "",
-        numberOfColour = "",
+        goodsName = "Jordan XXXVI",
+        goodsPrice = "US$185",
+        category = "Men's shoes",
+        numberOfColour = "1 Colour",
         isWished = false,
-        goodsImgResId = R.drawable.image_home_banner
+        goodsImgResId = R.drawable.image_jordan_xxxvi
     ),
     Goods(
         goodsId = 4,
-        goodsName = "Nike Jordan",
-        goodsPrice = "239,000원",
-        category = "",
-        numberOfColour = "",
+        goodsName = "Air Force 1",
+        goodsPrice = "US$115",
+        category = "Men's shoes",
+        numberOfColour = "2 Colours",
         isWished = false,
-        goodsImgResId = R.drawable.image_home_banner
+        goodsImgResId = R.drawable.image_air_force_1
     ),
     Goods(
         goodsId = 5,
@@ -166,7 +166,7 @@ fun PreviewMainScreen()
 fun MainScreen() {
     var purchaseGoodsList by remember { mutableStateOf(sampleGoods) }
     var homeNewGoodsList by remember { mutableStateOf(sampleNewGoods) }
-    var wishGoodsList by remember { mutableStateOf(sampleNewGoods) }
+    val wishGoodsList = purchaseGoodsList.filter { it.isWished }
 
     val navController = rememberNavController()
 
@@ -194,7 +194,18 @@ fun MainScreen() {
                 ProfileScreen()
             }
             composable<AppDestination.Purchase> {
-                PurchaseScreen(goodsList = purchaseGoodsList)
+                PurchaseScreen(
+                    goodsList = purchaseGoodsList,
+                    wishOnClick = { goodsId ->
+                        purchaseGoodsList = purchaseGoodsList.map { goods ->
+                            if (goods.goodsId == goodsId) {
+                                goods.copy(isWished = !goods.isWished)
+                            } else {
+                                goods
+                            }
+                        }
+                    }
+                )
             }
         }
     }

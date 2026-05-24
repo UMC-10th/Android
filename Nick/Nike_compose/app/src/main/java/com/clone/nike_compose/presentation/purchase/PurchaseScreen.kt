@@ -32,32 +32,19 @@ import com.clone.nike_compose.core.data.Goods
 @Composable
 fun PreviewPurchaseScreen() {
     MaterialTheme {
-        PurchaseScreen(goodsList = sampleGoods)
+        PurchaseScreen(
+            goodsList = sampleGoods,
+            wishOnClick = {})
     }
 }
 
 @Composable
-fun PurchaseScreen(goodsList: List<Goods>) {
-    var purchaseGoodsList by remember { mutableStateOf(goodsList) }
-
+fun PurchaseScreen(
+    goodsList: List<Goods>,
+    wishOnClick: (Int) -> Unit) {
     PurchaseGridList(
-        goodsList = purchaseGoodsList,
-        wishOnClick = { goodsId ->
-
-            purchaseGoodsList =
-                purchaseGoodsList.map { goods ->
-
-                    if (goods.goodsId == goodsId) {
-
-                        goods.copy(
-                            isWished = !goods.isWished
-                        )
-
-                    } else {
-                        goods
-                    }
-                }
-        }
+        goodsList = goodsList,
+        wishOnClick = wishOnClick
     )
 }
 
