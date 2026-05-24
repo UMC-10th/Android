@@ -130,7 +130,10 @@ private fun NewestItemSection(
             ),
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            items(dummyProducts) { product ->
+            items(
+                items = dummyProducts,
+                key = { it.id }
+            ) { product ->
                 NewestItem(
                     imageRes = product.imageRes,
                     name = product.name,
@@ -143,17 +146,18 @@ private fun NewestItemSection(
 
 // UI 작업용 더미데이터 선언, 추후 이동
 private data class ProductItem(
+    val id: Int,
     @get:DrawableRes val imageRes: Int,
     val name: String,
     val price: String,
 )
 
 private val dummyProducts = listOf(
-    ProductItem(R.drawable.img_newest_1, "Air Jordan XXXVI", "US$185"),
-    ProductItem(R.drawable.img_newest_2, "Nike Dunk Low", "US$110"),
-    ProductItem(R.drawable.img_newest_3, "Nike Air Max 90", "US$130"),
-    ProductItem(R.drawable.img_newest_4, "Nike Blazer Mid", "US$100"),
-    ProductItem(R.drawable.img_newest_5, "Air Force 1 '07", "US$90"),
+    ProductItem(1, R.drawable.img_newest_1, "Air Jordan XXXVI", "US$185"),
+    ProductItem(2, R.drawable.img_newest_2, "Nike Dunk Low", "US$110"),
+    ProductItem(3, R.drawable.img_newest_3, "Nike Air Max 90", "US$130"),
+    ProductItem(4, R.drawable.img_newest_4, "Nike Blazer Mid", "US$100"),
+    ProductItem(5, R.drawable.img_newest_5, "Air Force 1 '07", "US$90"),
 )
 
 @Preview(showBackground = true)
