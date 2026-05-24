@@ -15,6 +15,8 @@
     <string name="purchase_tab_all">전체</string>
     <string name="purchase_tab_tops">Tops&amp;T-Shirts</string>
     <string name="purchase_tab_sale">sale</string>
+    <string name="purchase_item_best_seller">BestSeller</string>
+    <string name="purchase_item_colours">%d Colours</string>
     <!-- Cart -->
     <string name="cart_empty">장바구니가 비어있습니다.\n제품을 추가하면 여기에 표시됩니다.</string>
     <string name="cart_btn">주문하기</string>
