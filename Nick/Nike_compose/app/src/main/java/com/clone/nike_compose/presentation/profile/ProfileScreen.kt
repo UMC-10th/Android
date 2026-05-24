@@ -1,8 +1,14 @@
-package com.clone.nike_compose.presentation.ui.profile
+package com.clone.nike_compose.presentation.profile
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.clone.nike_compose.core.data.Goods
 
 @Preview(showBackground = true)
 @Composable
@@ -16,3 +22,4 @@ fun PreviewProfileScreen() {
 fun ProfileScreen() {
 
 }
+

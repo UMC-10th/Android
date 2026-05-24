@@ -20,12 +20,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.clone.nike_compose.R
-import com.clone.nike_compose.presentation.ui.cart.CartScreen
-import com.clone.nike_compose.presentation.ui.home.HomeScreen
-import com.clone.nike_compose.presentation.ui.profile.ProfileScreen
-import com.clone.nike_compose.presentation.ui.purchase.PurchaseScreen
-import com.clone.nike_compose.presentation.ui.theme.Nike_composeTheme
-import com.clone.nike_compose.presentation.ui.wish.WishScreen
+import com.clone.nike_compose.core.data.Goods
+import com.clone.nike_compose.presentation.cart.CartScreen
+import com.clone.nike_compose.presentation.home.HomeScreen
+import com.clone.nike_compose.presentation.profile.ProfileScreen
+import com.clone.nike_compose.presentation.purchase.PurchaseScreen
+import com.clone.nike_compose.presentation.theme.Nike_composeTheme
+import com.clone.nike_compose.presentation.wish.WishScreen
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
@@ -37,6 +38,102 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+val sampleNewGoods = listOf(
+    Goods(
+        goodsId = 1,
+        goodsName = "Nike Air Max",
+        goodsPrice = "199,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 2,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    )
+)
+
+val sampleGoods = listOf(
+    Goods(
+        goodsId = 1,
+        goodsName = "Nike Air Max",
+        goodsPrice = "199,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 2,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 3,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 4,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 5,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 6,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 7,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    ),
+    Goods(
+        goodsId = 8,
+        goodsName = "Nike Jordan",
+        goodsPrice = "239,000원",
+        category = "",
+        numberOfColour = "",
+        isWished = false,
+        goodsImgResId = R.drawable.image_home_banner
+    )
+)
 
 sealed interface AppDestination {
     @Serializable
@@ -76,7 +173,7 @@ fun MainScreen() {
             modifier = Modifier.padding(padding)
         ) {
             composable<AppDestination.Home> {
-                HomeScreen()
+                HomeScreen(newGoodsList = sampleNewGoods)
             }
             composable<AppDestination.Cart> {
                 CartScreen(moveToPurchase = { navController.navigate(AppDestination.Purchase)})
@@ -88,7 +185,7 @@ fun MainScreen() {
                 ProfileScreen()
             }
             composable<AppDestination.Purchase> {
-                PurchaseScreen()
+                PurchaseScreen(goodsList = sampleGoods)
             }
         }
     }

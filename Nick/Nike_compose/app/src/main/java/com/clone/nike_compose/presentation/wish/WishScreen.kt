@@ -1,4 +1,4 @@
-package com.clone.nike_compose.presentation.ui.wish
+package com.clone.nike_compose.presentation.wish
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

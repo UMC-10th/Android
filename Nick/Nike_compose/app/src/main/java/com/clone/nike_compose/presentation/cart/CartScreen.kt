@@ -1,4 +1,4 @@
-package com.clone.nike_compose.presentation.ui.cart
+package com.clone.nike_compose.presentation.cart
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
