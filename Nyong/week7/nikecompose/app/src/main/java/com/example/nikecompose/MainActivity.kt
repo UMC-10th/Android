@@ -7,17 +7,26 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -73,6 +82,39 @@ sealed class BottomRoute(
     data object Cart : BottomRoute("cart", "장바구니", R.drawable.ic_cart)
     data object Profile : BottomRoute("profile", "프로필", R.drawable.ic_profile)
 }
+
+data class ProductItem(
+    val id: Int,
+    @DrawableRes val imageResId: Int,
+    val name: String,
+    val subTitle: String,
+    val colors: String,
+    val price: String,
+    val isLiked: Boolean = false,
+    val badge: String? = null
+)
+
+val productList = listOf(
+    ProductItem(
+        id = 1,
+        imageResId = R.drawable.img_shoe_1,
+        name = "Air Jordan XXXVI",
+        subTitle = "New Release",
+        colors = "1 Colour",
+        price = "US$185",
+        isLiked = false
+    ),
+    ProductItem(
+        id = 2,
+        imageResId = R.drawable.img_shoe_2,
+        name = "Nike Air Force 1 '07",
+        subTitle = "Women's Shoes",
+        colors = "5 Colours",
+        price = "US$115",
+        isLiked = true,
+        badge = "BestSeller"
+    )
+)
 
 @Composable
 fun NikeComposeApp() {
@@ -194,11 +236,92 @@ fun HomeScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(horizontal = 24.dp, vertical = 32.dp)
+            .padding(top = 32.dp)
     ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 24.dp)
+        ) {
+            Text(
+                text = "Discover",
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = "9월 4일 목요일",
+                fontSize = 13.sp,
+                color = Color.Gray
+            )
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.img_home_logo),
+                contentDescription = "홈 배너 이미지",
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.FillWidth
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = "What's new",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Gray
+            )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = "나이키 최신 상품",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 24.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(
+                items = productList,
+                key = { product -> product.id }
+            ) { product ->
+                HomeProductCard(product = product)
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeProductCard(
+    product: ProductItem
+) {
+    Column(
+        modifier = Modifier.width(180.dp)
+    ) {
+        Image(
+            painter = painterResource(id = product.imageResId),
+            contentDescription = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .background(Color(0xFFF5F5F5)),
+            contentScale = ContentScale.Crop
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
         Text(
-            text = "Discover",
-            fontSize = 26.sp,
+            text = product.name,
+            fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )
@@ -206,18 +329,10 @@ fun HomeScreen() {
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "9월 4일 목요일",
-            fontSize = 13.sp,
-            color = Color.Gray
-        )
-
-        Spacer(modifier = Modifier.height(28.dp))
-
-        Image(
-            painter = painterResource(id = R.drawable.img_home_logo),
-            contentDescription = "홈 배너 이미지",
-            modifier = Modifier.fillMaxWidth(),
-            contentScale = ContentScale.FillWidth
+            text = product.price,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
         )
     }
 }
@@ -225,7 +340,7 @@ fun HomeScreen() {
 @Composable
 fun ShopScreen() {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
-    val tabs = listOf("전체", "Tops & T-shirts", "Shoes")
+    val tabs = listOf("전체", "Tops & T-shirts", "sale")
 
     Column(
         modifier = Modifier
@@ -252,6 +367,98 @@ fun ShopScreen() {
                 )
             }
         }
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 24.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(36.dp)
+        ) {
+            items(
+                items = productList,
+                key = { product -> product.id }
+            ) { product ->
+                ShopProductCard(product = product)
+            }
+        }
+    }
+}
+
+@Composable
+fun ShopProductCard(
+    product: ProductItem
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = product.imageResId),
+                contentDescription = product.name,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .background(Color(0xFFF5F5F5)),
+                contentScale = ContentScale.Crop
+            )
+
+            Icon(
+                painter = painterResource(
+                    id = if (product.isLiked) R.drawable.ic_heart_on else R.drawable.ic_heart_off
+                ),
+                contentDescription = "좋아요",
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(8.dp)
+                    .size(22.dp),
+                tint = Color.Unspecified
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        product.badge?.let {
+            Text(
+                text = it,
+                fontSize = 11.sp,
+                color = Color(0xFFFF6A00),
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Text(
+            text = product.name,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            lineHeight = 14.sp
+        )
+
+        Text(
+            text = product.subTitle,
+            fontSize = 10.sp,
+            color = Color.Gray,
+            lineHeight = 13.sp
+        )
+
+        Text(
+            text = product.colors,
+            fontSize = 10.sp,
+            color = Color.Gray,
+            lineHeight = 13.sp
+        )
+
+        Spacer(modifier = Modifier.height(2.dp))
+
+        Text(
+            text = product.price,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
     }
 }
 
@@ -261,14 +468,88 @@ fun WishlistScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(horizontal = 24.dp, vertical = 32.dp)
     ) {
         Text(
             text = "위시리스트",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.padding(start = 24.dp, top = 40.dp)
+        )
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 28.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(28.dp)
+        ) {
+            items(
+                items = productList,
+                key = { product -> product.id }
+            ) { product ->
+                WishlistProductCard(product = product)
+            }
+        }
+    }
+}
+
+@Composable
+fun WishlistProductCard(
+    product: ProductItem
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Image(
+            painter = painterResource(id = product.imageResId),
+            contentDescription = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .background(Color(0xFFF5F5F5)),
+            contentScale = ContentScale.Crop
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = product.name,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            lineHeight = 14.sp
+        )
+
+        Text(
+            text = product.price,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
             color = Color.Black
         )
+
+        if (product.id == 2) {
+            Text(
+                text = product.subTitle,
+                fontSize = 10.sp,
+                color = Color.Gray,
+                lineHeight = 13.sp
+            )
+
+            Text(
+                text = product.colors,
+                fontSize = 10.sp,
+                color = Color.Gray,
+                lineHeight = 13.sp
+            )
+
+            Text(
+                text = "US$10",
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+        }
     }
 }
 
