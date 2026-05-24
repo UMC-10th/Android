@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -98,20 +99,39 @@ val productList = listOf(
     ProductItem(
         id = 1,
         imageResId = R.drawable.img_shoe_1,
-        name = "Air Jordan XXXVI",
-        subTitle = "New Release",
-        colors = "1 Colour",
-        price = "US$185",
-        isLiked = false
+        name = "Nike Everyday Plus Cushioned",
+        subTitle = "Training Ankle Socks (6 Pairs)",
+        colors = "5 Colours",
+        price = "US$10",
+        isLiked = true
     ),
     ProductItem(
         id = 2,
         imageResId = R.drawable.img_shoe_2,
+        name = "Nike Elite Crew",
+        subTitle = "Basketball Socks",
+        colors = "7 Colours",
+        price = "US$16",
+        isLiked = false
+    ),
+    ProductItem(
+        id = 3,
+        imageResId = R.drawable.img_shoe_1,
         name = "Nike Air Force 1 '07",
         subTitle = "Women's Shoes",
         colors = "5 Colours",
         price = "US$115",
-        isLiked = true,
+        isLiked = false,
+        badge = "BestSeller"
+    ),
+    ProductItem(
+        id = 4,
+        imageResId = R.drawable.img_shoe_2,
+        name = "Jordan ENike Air Force 1 '07ssentials",
+        subTitle = "Men's Shoes",
+        colors = "2 Colours",
+        price = "US$115",
+        isLiked = false,
         badge = "BestSeller"
     )
 )
@@ -232,69 +252,73 @@ fun NikeBottomBar(
 
 @Composable
 fun HomeScreen() {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
-            .padding(top = 32.dp)
+            .background(Color.White),
+        contentPadding = PaddingValues(top = 32.dp, bottom = 24.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(horizontal = 24.dp)
-        ) {
-            Text(
-                text = "Discover",
-                fontSize = 26.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
+        item {
+            Column(
+                modifier = Modifier.padding(horizontal = 24.dp)
+            ) {
+                Text(
+                    text = "Discover",
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
 
-            Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
-            Text(
-                text = "9월 4일 목요일",
-                fontSize = 13.sp,
-                color = Color.Gray
-            )
+                Text(
+                    text = "9월 4일 목요일",
+                    fontSize = 13.sp,
+                    color = Color.Gray
+                )
 
-            Spacer(modifier = Modifier.height(28.dp))
+                Spacer(modifier = Modifier.height(28.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.img_home_logo),
-                contentDescription = "홈 배너 이미지",
-                modifier = Modifier.fillMaxWidth(),
-                contentScale = ContentScale.FillWidth
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.img_home_logo),
+                    contentDescription = "홈 배너 이미지",
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = ContentScale.FillWidth
+                )
 
-            Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = "What's new",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Gray
-            )
+                Text(
+                    text = "What's new",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray
+                )
 
-            Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
-            Text(
-                text = "나이키 최신 상품",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
+                Text(
+                    text = "나이키 최신 상품",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(
-                items = productList,
-                key = { product -> product.id }
-            ) { product ->
-                HomeProductCard(product = product)
+        item {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 24.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(
+                    items = productList.take(2),
+                    key = { product -> product.id }
+                ) { product ->
+                    HomeProductCard(product = product)
+                }
             }
         }
     }
@@ -305,25 +329,26 @@ fun HomeProductCard(
     product: ProductItem
 ) {
     Column(
-        modifier = Modifier.width(180.dp)
+        modifier = Modifier.width(230.dp)
     ) {
         Image(
             painter = painterResource(id = product.imageResId),
             contentDescription = product.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .height(230.dp)
                 .background(Color(0xFFF5F5F5)),
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         Text(
             text = product.name,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color.Black,
+            lineHeight = 14.sp
         )
 
         Spacer(modifier = Modifier.height(4.dp))
