@@ -5,7 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.nike.presentation.purchase.ProductCategory
 import com.example.nike.presentation.purchase.ProductItem
-import com.example.nike.presentation.purchase.component.ProductGrid
+import com.example.nike.core.designsystem.component.ProductGrid
+import com.example.nike.presentation.purchase.component.PurchaseItemCard
 
 @Composable
 fun TopsTabScreen(
@@ -16,6 +17,9 @@ fun TopsTabScreen(
         items = items.filter {
             it.category == ProductCategory.TOPS
         },
+        key = { it.id },
         modifier = modifier.fillMaxSize()
-    )
+    ) { item ->
+        PurchaseItemCard(item)
+    }
 }

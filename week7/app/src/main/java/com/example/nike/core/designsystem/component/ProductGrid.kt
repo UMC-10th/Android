@@ -1,4 +1,4 @@
-package com.example.nike.presentation.purchase.component
+package com.example.nike.core.designsystem.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,12 +8,13 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.nike.presentation.purchase.ProductItem
 
 @Composable
-fun ProductGrid(
-    items: List<ProductItem>,
+fun <T> ProductGrid(
+    items: List<T>,
+    key: (T) -> Any, // T가 ID를 보장하지 않으므로 외부에서 주입
     modifier: Modifier = Modifier,
+    itemContent: @Composable (T) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -27,9 +28,9 @@ fun ProductGrid(
     ) {
         items(
             items,
-            key = {it.id}
+            key = key
         ) { item ->
-            PurchaseItem(item)
+            itemContent(item)
         }
     }
 }

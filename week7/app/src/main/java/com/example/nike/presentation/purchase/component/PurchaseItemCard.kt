@@ -26,7 +26,7 @@ import com.example.nike.R
 import com.example.nike.presentation.purchase.ProductItem
 
 @Composable
-fun PurchaseItem(
+fun PurchaseItemCard(
     item: ProductItem,
     modifier: Modifier = Modifier,
 ) {

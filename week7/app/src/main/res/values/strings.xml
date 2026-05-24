@@ -20,4 +20,6 @@
     <!-- Cart -->
     <string name="cart_empty">장바구니가 비어있습니다.\n제품을 추가하면 여기에 표시됩니다.</string>
     <string name="cart_btn">주문하기</string>
+    <!-- Wishlist -->
+    <string name="wishlist_title">위시리스트</string>
 </resources>
