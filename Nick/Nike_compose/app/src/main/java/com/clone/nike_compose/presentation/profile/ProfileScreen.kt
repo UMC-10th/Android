@@ -1,4 +1,4 @@
-package com.clone.nike_compose.ui.purchase
+package com.clone.nike_compose.presentation.ui.profile
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -6,13 +6,13 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPurchaseScreen() {
+fun PreviewProfileScreen() {
     MaterialTheme {
-        PurchaseScreen()
+        ProfileScreen()
     }
 }
 
 @Composable
-fun PurchaseScreen() {
+fun ProfileScreen() {
 
 }

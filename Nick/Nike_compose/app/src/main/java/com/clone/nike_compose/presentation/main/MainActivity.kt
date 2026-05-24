@@ -1,13 +1,10 @@
-package com.clone.nike_compose
+package com.clone.nike_compose.presentation.main
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -15,23 +12,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.clone.nike_compose.ui.cart.CartScreen
-import com.clone.nike_compose.ui.home.HomeScreen
-import com.clone.nike_compose.ui.profile.ProfileScreen
-import com.clone.nike_compose.ui.purchase.PurchaseScreen
-import com.clone.nike_compose.ui.theme.Nike_composeTheme
-import com.clone.nike_compose.ui.wish.WishScreen
+import com.clone.nike_compose.R
+import com.clone.nike_compose.presentation.ui.cart.CartScreen
+import com.clone.nike_compose.presentation.ui.home.HomeScreen
+import com.clone.nike_compose.presentation.ui.profile.ProfileScreen
+import com.clone.nike_compose.presentation.ui.purchase.PurchaseScreen
+import com.clone.nike_compose.presentation.ui.theme.Nike_composeTheme
+import com.clone.nike_compose.presentation.ui.wish.WishScreen
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
