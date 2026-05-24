@@ -18,6 +18,7 @@ import com.example.nike.R
 import com.example.nike.core.designsystem.component.ProductGrid
 import com.example.nike.core.designsystem.theme.NikeTheme
 import com.example.nike.presentation.wishlist.component.WishlistItemCard
+import com.example.nike.presentation.wishlist.model.WishlistItem
 
 @Composable
 fun WishlistRoute(
@@ -62,15 +63,6 @@ private fun WishlistScreen(
 }
 
 // UI 작업용 더미데이터 선언, 추후 이동
-data class WishlistItem(
-    val id: Int,
-    @get:DrawableRes val imageRes: Int,
-    val name: String,
-    val subName: String,
-    val colours: Int,
-    val price: String,
-)
-
 private val dummyWishlist = listOf(
     WishlistItem(1, R.drawable.img_shoes_1, "Nike Air Force 1 '07", "Women's Shoes", 5, "US$115"),
     WishlistItem(

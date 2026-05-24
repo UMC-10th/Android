@@ -1,6 +1,5 @@
 package com.example.nike.presentation.home
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.nike.R
 import com.example.nike.core.designsystem.theme.NikeTheme
-import com.example.nike.presentation.home.component.NewestItem
+import com.example.nike.presentation.home.component.NewestItemCard
+import com.example.nike.presentation.home.model.NewestItem
 
 @Composable
 fun HomeRoute(
@@ -52,7 +52,7 @@ private fun HomeScreen(
         }
 
         item {
-            NewestItemSection()
+            NewestItemCardSection()
         }
     }
 }
@@ -91,7 +91,7 @@ private fun TitleSection(
 }
 
 @Composable
-private fun NewestItemSection(
+private fun NewestItemCardSection(
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -134,7 +134,7 @@ private fun NewestItemSection(
                 items = dummyProducts,
                 key = { it.id }
             ) { product ->
-                NewestItem(
+                NewestItemCard(
                     imageRes = product.imageRes,
                     name = product.name,
                     price = product.price
@@ -145,19 +145,12 @@ private fun NewestItemSection(
 }
 
 // UI 작업용 더미데이터 선언, 추후 이동
-private data class ProductItem(
-    val id: Int,
-    @get:DrawableRes val imageRes: Int,
-    val name: String,
-    val price: String,
-)
-
 private val dummyProducts = listOf(
-    ProductItem(1, R.drawable.img_newest_1, "Air Jordan XXXVI", "US$185"),
-    ProductItem(2, R.drawable.img_newest_2, "Nike Dunk Low", "US$110"),
-    ProductItem(3, R.drawable.img_newest_3, "Nike Air Max 90", "US$130"),
-    ProductItem(4, R.drawable.img_newest_4, "Nike Blazer Mid", "US$100"),
-    ProductItem(5, R.drawable.img_newest_5, "Air Force 1 '07", "US$90"),
+    NewestItem(1, R.drawable.img_newest_1, "Air Jordan XXXVI", "US$185"),
+    NewestItem(2, R.drawable.img_newest_2, "Nike Dunk Low", "US$110"),
+    NewestItem(3, R.drawable.img_newest_3, "Nike Air Max 90", "US$130"),
+    NewestItem(4, R.drawable.img_newest_4, "Nike Blazer Mid", "US$100"),
+    NewestItem(5, R.drawable.img_newest_5, "Air Force 1 '07", "US$90"),
 )
 
 @Preview(showBackground = true)

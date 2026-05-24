@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.nike.R
-import com.example.nike.presentation.wishlist.WishlistItem
+import com.example.nike.presentation.wishlist.model.WishlistItem
 
 @Composable
 fun WishlistItemCard(
@@ -55,7 +55,7 @@ fun WishlistItemCard(
             )
 
             Text(
-                text = stringResource(R.string.purchase_item_colours, item.colours),
+                text = stringResource(R.string.wishlist_item_colours, item.colours),
                 color = Color(0xFF767676),
                 fontSize = 14.sp
             )

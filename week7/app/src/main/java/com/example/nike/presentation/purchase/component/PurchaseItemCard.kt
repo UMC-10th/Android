@@ -23,11 +23,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.nike.R
-import com.example.nike.presentation.purchase.ProductItem
+import com.example.nike.presentation.home.model.NewestItem
+import com.example.nike.presentation.purchase.model.PurchaseItem
 
 @Composable
 fun PurchaseItemCard(
-    item: ProductItem,
+    item: PurchaseItem,
     modifier: Modifier = Modifier,
 ) {
     Column(

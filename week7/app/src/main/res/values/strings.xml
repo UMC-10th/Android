@@ -22,4 +22,5 @@
     <string name="cart_btn">주문하기</string>
     <!-- Wishlist -->
     <string name="wishlist_title">위시리스트</string>
+    <string name="wishlist_item_colours">%d Colours</string>
 </resources>
