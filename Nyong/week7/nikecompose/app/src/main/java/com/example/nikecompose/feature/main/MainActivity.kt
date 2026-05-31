@@ -1,4 +1,4 @@
-package com.example.nikecompose
+package com.example.nikecompose.feature.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -39,9 +39,9 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,6 +57,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.nikecompose.R
 import com.example.nikecompose.ui.theme.NikeComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -149,8 +150,8 @@ fun NikeComposeApp() {
     )
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        containerColor = Color.White,
+        modifier = Modifier.Companion.fillMaxSize(),
+        containerColor = Color.Companion.White,
         bottomBar = {
             NikeBottomBar(
                 items = bottomItems,
@@ -170,7 +171,7 @@ fun NikeComposeApp() {
         NavHost(
             navController = navController,
             startDestination = BottomRoute.Home.route,
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
@@ -214,12 +215,12 @@ fun NikeBottomBar(
     onItemClick: (BottomRoute) -> Unit
 ) {
     NavigationBar(
-        containerColor = Color.White,
+        containerColor = Color.Companion.White,
         tonalElevation = 0.dp
     ) {
         items.forEach { item ->
             val selected = currentRoute == item.route
-            val iconColor = if (selected) Color.Black else Color.Gray
+            val iconColor = if (selected) Color.Companion.Black else Color.Companion.Gray
 
             NavigationBarItem(
                 selected = selected,
@@ -228,7 +229,7 @@ fun NikeBottomBar(
                     Icon(
                         painter = painterResource(id = item.iconResId),
                         contentDescription = item.label,
-                        modifier = Modifier.size(22.dp),
+                        modifier = Modifier.Companion.size(22.dp),
                         tint = iconColor
                     )
                 },
@@ -239,11 +240,11 @@ fun NikeBottomBar(
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color.Black,
-                    selectedTextColor = Color.Black,
-                    unselectedIconColor = Color.Gray,
-                    unselectedTextColor = Color.Gray,
-                    indicatorColor = Color.Transparent
+                    selectedIconColor = Color.Companion.Black,
+                    selectedTextColor = Color.Companion.Black,
+                    unselectedIconColor = Color.Companion.Gray,
+                    unselectedTextColor = Color.Companion.Gray,
+                    indicatorColor = Color.Companion.Transparent
                 )
             )
         }
@@ -253,58 +254,58 @@ fun NikeBottomBar(
 @Composable
 fun HomeScreen() {
     LazyColumn(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.Companion.White),
         contentPadding = PaddingValues(top = 32.dp, bottom = 24.dp)
     ) {
         item {
             Column(
-                modifier = Modifier.padding(horizontal = 24.dp)
+                modifier = Modifier.Companion.padding(horizontal = 24.dp)
             ) {
                 Text(
                     text = "Discover",
                     fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    fontWeight = FontWeight.Companion.Bold,
+                    color = Color.Companion.Black
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.Companion.height(4.dp))
 
                 Text(
                     text = "9월 4일 목요일",
                     fontSize = 13.sp,
-                    color = Color.Gray
+                    color = Color.Companion.Gray
                 )
 
-                Spacer(modifier = Modifier.height(28.dp))
+                Spacer(modifier = Modifier.Companion.height(28.dp))
 
                 Image(
                     painter = painterResource(id = R.drawable.img_home_logo),
                     contentDescription = "홈 배너 이미지",
-                    modifier = Modifier.fillMaxWidth(),
-                    contentScale = ContentScale.FillWidth
+                    modifier = Modifier.Companion.fillMaxWidth(),
+                    contentScale = ContentScale.Companion.FillWidth
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.Companion.height(24.dp))
 
                 Text(
                     text = "What's new",
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Gray
+                    fontWeight = FontWeight.Companion.Bold,
+                    color = Color.Companion.Gray
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.Companion.height(4.dp))
 
                 Text(
                     text = "나이키 최신 상품",
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    fontWeight = FontWeight.Companion.Bold,
+                    color = Color.Companion.Black
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.Companion.height(16.dp))
             }
         }
 
@@ -329,35 +330,35 @@ fun HomeProductCard(
     product: ProductItem
 ) {
     Column(
-        modifier = Modifier.width(230.dp)
+        modifier = Modifier.Companion.width(230.dp)
     ) {
         Image(
             painter = painterResource(id = product.imageResId),
             contentDescription = product.name,
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxWidth()
                 .height(230.dp)
                 .background(Color(0xFFF5F5F5)),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Companion.Crop
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.Companion.height(12.dp))
 
         Text(
             text = product.name,
             fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black,
             lineHeight = 14.sp
         )
 
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.Companion.height(4.dp))
 
         Text(
             text = product.price,
             fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black
         )
     }
 }
@@ -368,16 +369,16 @@ fun ShopScreen() {
     val tabs = listOf("전체", "Tops & T-shirts", "sale")
 
     Column(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color.Companion.White)
     ) {
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.Companion.height(28.dp))
 
         TabRow(
             selectedTabIndex = selectedTabIndex,
-            containerColor = Color.White,
-            contentColor = Color.Black
+            containerColor = Color.Companion.White,
+            contentColor = Color.Companion.Black
         ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
@@ -395,7 +396,7 @@ fun ShopScreen() {
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.Companion.fillMaxSize(),
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 24.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(36.dp)
@@ -415,19 +416,19 @@ fun ShopProductCard(
     product: ProductItem
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.Companion.fillMaxWidth()
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.Companion.fillMaxWidth()
         ) {
             Image(
                 painter = painterResource(id = product.imageResId),
                 contentDescription = product.name,
-                modifier = Modifier
+                modifier = Modifier.Companion
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .background(Color(0xFFF5F5F5)),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Companion.Crop
             )
 
             Icon(
@@ -435,54 +436,54 @@ fun ShopProductCard(
                     id = if (product.isLiked) R.drawable.ic_heart_on else R.drawable.ic_heart_off
                 ),
                 contentDescription = "좋아요",
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
+                modifier = Modifier.Companion
+                    .align(Alignment.Companion.TopEnd)
                     .padding(8.dp)
                     .size(22.dp),
-                tint = Color.Unspecified
+                tint = Color.Companion.Unspecified
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.Companion.height(8.dp))
 
         product.badge?.let {
             Text(
                 text = it,
                 fontSize = 11.sp,
                 color = Color(0xFFFF6A00),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Companion.Bold
             )
         }
 
         Text(
             text = product.name,
             fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black,
             lineHeight = 14.sp
         )
 
         Text(
             text = product.subTitle,
             fontSize = 10.sp,
-            color = Color.Gray,
+            color = Color.Companion.Gray,
             lineHeight = 13.sp
         )
 
         Text(
             text = product.colors,
             fontSize = 10.sp,
-            color = Color.Gray,
+            color = Color.Companion.Gray,
             lineHeight = 13.sp
         )
 
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.Companion.height(2.dp))
 
         Text(
             text = product.price,
             fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black
         )
     }
 }
@@ -490,21 +491,21 @@ fun ShopProductCard(
 @Composable
 fun WishlistScreen() {
     Column(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color.Companion.White)
     ) {
         Text(
             text = "위시리스트",
             fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
-            modifier = Modifier.padding(start = 24.dp, top = 40.dp)
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black,
+            modifier = Modifier.Companion.padding(start = 24.dp, top = 40.dp)
         )
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.Companion.fillMaxSize(),
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 28.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(28.dp)
@@ -524,55 +525,55 @@ fun WishlistProductCard(
     product: ProductItem
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.Companion.fillMaxWidth()
     ) {
         Image(
             painter = painterResource(id = product.imageResId),
             contentDescription = product.name,
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(Color(0xFFF5F5F5)),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Companion.Crop
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.Companion.height(8.dp))
 
         Text(
             text = product.name,
             fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black,
             lineHeight = 14.sp
         )
 
         Text(
             text = product.price,
             fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black
         )
 
         if (product.id == 2) {
             Text(
                 text = product.subTitle,
                 fontSize = 10.sp,
-                color = Color.Gray,
+                color = Color.Companion.Gray,
                 lineHeight = 13.sp
             )
 
             Text(
                 text = product.colors,
                 fontSize = 10.sp,
-                color = Color.Gray,
+                color = Color.Companion.Gray,
                 lineHeight = 13.sp
             )
 
             Text(
                 text = "US$10",
                 fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                fontWeight = FontWeight.Companion.Bold,
+                color = Color.Companion.Black
             )
         }
     }
@@ -583,33 +584,33 @@ fun CartScreen(
     onOrderClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color.Companion.White)
             .padding(horizontal = 24.dp)
     ) {
         Box(
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxWidth()
                 .weight(1f),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Companion.Center
         ) {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.Companion.CenterHorizontally
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_cartcircle),
                     contentDescription = "장바구니 아이콘",
-                    modifier = Modifier.size(56.dp)
+                    modifier = Modifier.Companion.size(56.dp)
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.Companion.height(12.dp))
 
                 Text(
                     text = "장바구니가 비어 있습니다.\n제품을 추가하면 여기에 표시됩니다.",
                     fontSize = 12.sp,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center,
+                    color = Color.Companion.Black,
+                    textAlign = TextAlign.Companion.Center,
                     lineHeight = 18.sp
                 )
             }
@@ -617,39 +618,39 @@ fun CartScreen(
 
         Button(
             onClick = onOrderClick,
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxWidth()
                 .height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Black,
-                contentColor = Color.White
+                containerColor = Color.Companion.Black,
+                contentColor = Color.Companion.White
             )
         ) {
             Text(
                 text = "주문하기",
                 fontSize = 15.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Companion.Bold
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-        Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))
+        Spacer(modifier = Modifier.Companion.height(16.dp))
+        Spacer(modifier = Modifier.Companion.windowInsetsBottomHeight(WindowInsets.Companion.navigationBars))
     }
 }
 
 @Composable
 fun ProfileScreen() {
     Column(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color.Companion.White)
             .padding(horizontal = 24.dp, vertical = 32.dp)
     ) {
         Text(
             text = "프로필",
             fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
+            fontWeight = FontWeight.Companion.Bold,
+            color = Color.Companion.Black
         )
     }
 }
