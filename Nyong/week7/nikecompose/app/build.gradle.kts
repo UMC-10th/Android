@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -19,6 +21,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        properties.load(rootProject.file("local.properties").inputStream())
+
+        buildConfigField(
+            "String",
+            "REQRES_API_KEY",
+            "\"${properties.getProperty("REQRES_API_KEY")}\""
+        )
     }
 
     buildTypes {
@@ -36,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -57,4 +69,17 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    // ViewModel을 Compose에서 사용하기 위한 의존성
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // OkHttp 로그 확인용
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Coil: Compose 이미지 로딩용
+    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
 }
