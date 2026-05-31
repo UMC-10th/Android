@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -178,23 +182,30 @@ private fun ProfileScreenContent(
 
                 Spacer(Modifier.height(12.dp))
 
-                LazyRow(
+                val pagerState = rememberPagerState(
+                    initialPage = 0,
+                    pageCount = { following.size }
+                )
+
+                HorizontalPager(
+                    state = pagerState,
                     modifier = Modifier.fillMaxWidth(),
                     contentPadding = PaddingValues(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    items(following) { avatarUrl ->
-                        AsyncImage(
-                            model = avatarUrl,
-                            contentDescription = "following",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(width = 82.dp, height = 82.dp)
-                                .clip(RoundedCornerShape(2.dp))
-                                .background(Color(0xFFD0D0D0))
-                        )
-                    }
+                    pageSpacing = 8.dp,
+                    pageSize = PageSize.Fixed(82.dp)
+                ) { page ->
+                    val avatarUrl = following[page]
+                    AsyncImage(
+                        model = avatarUrl,
+                        contentDescription = "following",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(82.dp)
+                            .clip(RoundedCornerShape(2.dp))
+                            .background(Color(0xFFD0D0D0))
+                    )
                 }
+
 
             }
         }
