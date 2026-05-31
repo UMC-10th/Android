@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.nike.R
 import com.example.nike.core.designsystem.theme.NikeTheme
-import com.example.nike.presentation.profile.model.User
+import com.example.nike.domain.model.profile.User
 
 @Composable
 fun ProfileRoute(
