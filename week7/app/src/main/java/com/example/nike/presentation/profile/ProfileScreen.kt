@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -24,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,6 +38,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.nike.R
 import com.example.nike.core.designsystem.theme.NikeTheme
@@ -44,8 +48,9 @@ import com.example.nike.domain.model.profile.User
 @Composable
 fun ProfileRoute(
     modifier: Modifier = Modifier,
+    viewModel: ProfileViewModel = viewModel(),
 ) {
-    val users = emptyList<User>()
+    val users by viewModel.users.collectAsStateWithLifecycle()
 
     val me = users.find { it.id == 1 }
     val following = users.filter { it.id != 1 }
@@ -63,27 +68,32 @@ private fun ProfileScreen(
     followingList: List<User>,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize(),
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
     ) {
-        MyProfileSection(
-            me = me,
-        )
+        item {
+            MyProfileSection(me = me)
+        }
 
-        HorizontalDivider(color = Color(0xFFF6F6F6), thickness = 8.dp)
+        item {
+            HorizontalDivider(color = Color(0xFFF6F6F6), thickness = 8.dp)
+        }
 
-        MemberBenefitSection()
+        item {
+            MemberBenefitSection()
+        }
 
-        HorizontalDivider(color = Color(0xFFF6F6F6), thickness = 8.dp)
+        item {
+            HorizontalDivider(color = Color(0xFFF6F6F6), thickness = 8.dp)
+        }
 
-        FollowingListSection(
-            followingList = followingList,
-        )
+        item {
+            FollowingListSection(followingList = followingList)
+        }
 
-        Spacer(modifier = Modifier.weight(1f))
-
-        Footer()
+        item {
+            Footer()
+        }
     }
 }
 
@@ -91,7 +101,7 @@ private fun ProfileScreen(
 private fun MyProfileSection(
     me: User?,
     modifier: Modifier = Modifier,
-){
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -115,14 +125,14 @@ private fun MyProfileSection(
         Spacer(modifier = Modifier.height(30.dp))
 
         Text(
-            text = me?.firstName + me?.lastName,
+            text = "${me?.firstName} ${me?.lastName}",
             color = Color.Black,
             fontSize = 20.sp,
         )
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        Box (
+        Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(50))
                 .border(
@@ -152,7 +162,7 @@ private fun MyProfileSection(
 @Composable
 private fun MenuRow(
     modifier: Modifier = Modifier,
-){
+) {
     Row(
         modifier = modifier
             .fillMaxWidth(),
@@ -208,11 +218,11 @@ private fun MenuItem(
     @StringRes label: Int,
     modifier: Modifier = Modifier,
 ) {
-    Column (
+    Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-    ){
+    ) {
         Icon(
             imageVector = ImageVector.vectorResource(icon),
             contentDescription = null,
@@ -230,7 +240,7 @@ private fun MenuItem(
 @Composable
 private fun MemberBenefitSection(
     modifier: Modifier = Modifier,
-){
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -244,7 +254,7 @@ private fun MemberBenefitSection(
         Column(
             modifier = Modifier,
             verticalArrangement = Arrangement.spacedBy(6.dp)
-        ){
+        ) {
             Text(
                 text = stringResource(R.string.profile_member_benefit),
                 color = Color.Black,
@@ -270,12 +280,13 @@ private fun MemberBenefitSection(
 private fun FollowingListSection(
     followingList: List<User>,
     modifier: Modifier = Modifier,
-){
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                vertical = 28.dp,
+                top = 28.dp,
+                bottom = 115.dp,
             ),
         verticalArrangement = Arrangement.spacedBy(18.dp)
     ) {
@@ -323,12 +334,12 @@ private fun Footer(
 ) {
     Box(
         modifier = modifier
+            .background(Color(0xFFF6F6F6))
             .fillMaxWidth()
             .padding(
                 vertical = 19.dp,
                 horizontal = 79.dp,
-            )
-            .background(Color(0xFFF6F6F6)),
+            ),
         contentAlignment = Alignment.Center,
     ) {
         Text(

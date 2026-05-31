@@ -19,6 +19,12 @@ object RetrofitClient {
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
+        .addInterceptor { chain ->
+            val request = chain.request().newBuilder()
+                .addHeader("x-api-key", BuildConfig.API_KEY)
+                .build()
+            chain.proceed(request)
+        }
         .build()
 
     private val instance: Retrofit = Retrofit.Builder()
