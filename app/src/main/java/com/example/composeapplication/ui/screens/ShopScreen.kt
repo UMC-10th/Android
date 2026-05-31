@@ -50,6 +50,38 @@ fun ShopScreen() {
             imageRes = R.drawable.black_shoe,
             description = "Men's Shoes",
             isBestSeller = true
+        ),
+        Product(
+            id = 105,
+            name = "Nike Air Force 1 '07",
+            price = "US$115",
+            imageRes = R.drawable.white_shoe,
+            description = "Women's Shoes",
+            isBestSeller = true
+        ),
+        Product(
+            id = 106,
+            name = "Nike Air Force 1 '07",
+            price = "US$115",
+            imageRes = R.drawable.white_shoe,
+            description = "Women's Shoes",
+            isBestSeller = true
+        ),
+        Product(
+            id = 107,
+            name = "Nike Air Force 1 '07",
+            price = "US$115",
+            imageRes = R.drawable.white_shoe,
+            description = "Women's Shoes",
+            isBestSeller = true
+        ),
+        Product(
+            id = 108,
+            name = "Nike Air Force 1 '07",
+            price = "US$115",
+            imageRes = R.drawable.white_shoe,
+            description = "Women's Shoes",
+            isBestSeller = true
         )
     )
 

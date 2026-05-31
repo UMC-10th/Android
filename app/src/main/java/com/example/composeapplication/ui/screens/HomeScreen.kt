@@ -34,11 +34,40 @@ fun HomeScreen() {
             price = "US$115",
             imageRes = R.drawable.black_shoe,
             isBestSeller = true
+        ),
+        Product(
+            id = 13,
+            name = "Nike Air Force 1",
+            price = "US$115",
+            imageRes = R.drawable.black_shoe,
+            isBestSeller = true
+        ),
+        Product(
+            id = 14,
+            name = "Nike Air Force 1",
+            price = "US$115",
+            imageRes = R.drawable.black_shoe,
+            isBestSeller = true
+        ),
+        Product(
+            id = 15,
+            name = "Nike Air Force 1",
+            price = "US$115",
+            imageRes = R.drawable.black_shoe,
+            isBestSeller = true
+        ),
+        Product(
+            id = 16,
+            name = "Nike Air Force 1",
+            price = "US$115",
+            imageRes = R.drawable.black_shoe,
+            isBestSeller = true
         )
-        // ... 나머지 데이터도 동일하게 추가
+
+
     )
 
-    // 💡 전체 화면을 감싸던 Column을 LazyColumn으로 교체!
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         // 💡 Modifier.padding 대신 contentPadding을 사용하여 리스트 양끝 여백 처리
@@ -82,7 +111,7 @@ fun HomeScreen() {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // 💡 미션 요구사항: items() 사용 및 key 할당으로 상태 안정성 확보
+
                     items(
                         items = shopProducts,
                         key = { product -> product.id }

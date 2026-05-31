@@ -30,7 +30,37 @@ fun WishlistScreen() {
             price = "US$10",
             imageRes = R.drawable.black_shoe,
             description = "Training Ankle Socks"
+        ),
+        Product(
+            id = 203,
+            name = "Air Jordan 1 Mid",
+            price = "US$125",
+            imageRes = R.drawable.white_shoe
+        ),
+        Product(
+            id = 204,
+            name = "Air Jordan 1 Mid",
+            price = "US$125",
+            imageRes = R.drawable.white_shoe
+        ),
+        Product(
+            id = 205,
+            name = "Air Jordan 1 Mid",
+            price = "US$125",
+            imageRes = R.drawable.white_shoe
+        ),Product(
+            id = 206,
+            name = "Air Jordan 1 Mid",
+            price = "US$125",
+            imageRes = R.drawable.white_shoe
+        ),
+        Product(
+            id = 207,
+            name = "Air Jordan 1 Mid",
+            price = "US$125",
+            imageRes = R.drawable.white_shoe
         )
+
     )
 
     LazyVerticalGrid(
