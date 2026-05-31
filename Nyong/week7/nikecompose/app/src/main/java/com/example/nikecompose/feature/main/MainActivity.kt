@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -59,6 +58,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.nikecompose.R
 import com.example.nikecompose.ui.theme.NikeComposeTheme
+import com.example.nikecompose.navigation.BottomRoute
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,18 +71,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-sealed class BottomRoute(
-    val route: String,
-    val label: String,
-    @DrawableRes val iconResId: Int
-) {
-    data object Home : BottomRoute("home", "홈", R.drawable.ic_home)
-    data object Shop : BottomRoute("shop", "구매하기", R.drawable.ic_buy)
-    data object Wishlist : BottomRoute("wishlist", "위시리스트", R.drawable.ic_wishlist)
-    data object Cart : BottomRoute("cart", "장바구니", R.drawable.ic_cart)
-    data object Profile : BottomRoute("profile", "프로필", R.drawable.ic_profile)
 }
 
 data class ProductItem(
