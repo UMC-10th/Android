@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(& \"C:\\\\Users\\\\doyeo\\\\AndroidStudioProjects\\\\NikeApp\\\\gradlew.bat\" assembleDebug 2>&1)"
-    ]
-  }
-}

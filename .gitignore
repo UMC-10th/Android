@@ -32,3 +32,6 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Claude Code (로컬 설정, 커밋하지 않음)
+.claude/
