@@ -1,6 +1,5 @@
-package com.clone.nike_compose.ui.theme
+package com.clone.nike_compose.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

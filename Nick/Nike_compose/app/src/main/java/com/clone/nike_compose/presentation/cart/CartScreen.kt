@@ -1,10 +1,8 @@
-package com.clone.nike_compose.ui.cart
+package com.clone.nike_compose.presentation.cart
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,11 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.clone.nike_compose.AppDestination
 import com.clone.nike_compose.R
-import com.clone.nike_compose.ui.home.HomeScreen
 
 @Preview(showBackground = true)
 @Composable
