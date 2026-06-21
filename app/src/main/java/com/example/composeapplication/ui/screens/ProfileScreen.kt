@@ -15,129 +15,142 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.example.composeapplication.data.model.UserData
-import com.example.composeapplication.network.RetrofitClient
 
 @Composable
-fun ProfileScreen() {
-    var user by remember { mutableStateOf<UserData?>(null) }
-    var followingList by remember { mutableStateOf<List<UserData>>(emptyList()) }
-    var isLoading by remember { mutableStateOf(true) }
+fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
-        try {
-            val userResponse = RetrofitClient.service.getUser(1)
-            if (userResponse.isSuccessful) {
-                user = userResponse.body()?.data
+    when (val state = uiState) {
+        is ProfileUiState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
             }
+        }
 
-            val listResponse = RetrofitClient.service.getUserList(1)
-            if (listResponse.isSuccessful) {
-                followingList = listResponse.body()?.data ?: emptyList()
+        is ProfileUiState.Success -> {
+            ProfileContent(
+                user = state.user,
+                followingList = state.followingList
+            )
+        }
+
+        is ProfileUiState.Error -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = state.message,
+                    color = Color.Red,
+                    fontSize = 16.sp
+                )
+                Button(
+                    onClick = { viewModel.fetchProfile() },
+                    modifier = Modifier.padding(top = 16.dp)
+                ) {
+                    Text("다시 시도")
+                }
             }
-        } catch (e: Exception) {
-            // 에러 무시
-        } finally {
-            isLoading = false
         }
     }
+}
 
+@Composable
+private fun ProfileContent(
+    user: UserData,
+    followingList: List<UserData>
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.padding(top = 80.dp))
-        } else {
-            user?.let { currentUser ->
-                AsyncImage(
-                    model = currentUser.avatar,
-                    contentDescription = "프로필 이미지",
-                    modifier = Modifier
-                        .padding(top = 40.dp)
-                        .size(100.dp)
-                        .clip(CircleShape)
-                )
-                Text(
-                    text = "${currentUser.firstName} ${currentUser.lastName}",
-                    modifier = Modifier.padding(top = 16.dp),
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            } ?: run {
-                Text(
-                    text = "유저 정보를 불러올 수 없습니다.",
-                    modifier = Modifier.padding(top = 40.dp),
-                    color = Color.Red
-                )
-            }
+        AsyncImage(
+            model = user.avatar,
+            contentDescription = "프로필 이미지",
+            modifier = Modifier
+                .padding(top = 40.dp)
+                .size(100.dp)
+                .clip(CircleShape)
+        )
+        Text(
+            text = "${user.firstName} ${user.lastName}",
+            modifier = Modifier.padding(top = 16.dp),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
 
-            OutlinedButton(
-                onClick = { },
-                modifier = Modifier.padding(top = 24.dp),
-                shape = RoundedCornerShape(24.dp)
-            ) {
-                Text("프로필 수정", color = Color.Black)
-            }
+        OutlinedButton(
+            onClick = { },
+            modifier = Modifier.padding(top = 24.dp),
+            shape = RoundedCornerShape(24.dp)
+        ) {
+            Text("프로필 수정", color = Color.Black)
+        }
 
-            Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
-            Text(
-                text = "팔로잉 (${followingList.size})",
+        Text(
+            text = "팔로잉 (${followingList.size})",
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(bottom = 8.dp),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        if (followingList.isNotEmpty()) {
+            val pagerState = rememberPagerState(pageCount = { followingList.size })
+
+            HorizontalPager(
+                state = pagerState,
                 modifier = Modifier
-                    .align(Alignment.Start)
-                    .padding(bottom = 8.dp),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            if (followingList.isNotEmpty()) {
-                val pagerState = rememberPagerState(pageCount = { followingList.size })
-
-                HorizontalPager(
-                    state = pagerState,
+                    .fillMaxWidth()
+                    .height(140.dp),
+                pageSpacing = 12.dp,
+                contentPadding = PaddingValues(horizontal = 32.dp)
+            ) { page ->
+                val followUser = followingList[page]
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(140.dp),
-                    pageSpacing = 12.dp,
-                    contentPadding = PaddingValues(horizontal = 32.dp)
-                ) { page ->
-                    val followUser = followingList[page]
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(RoundedCornerShape(12.dp))
-                            .background(Color(0xFFEFEFEF)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            AsyncImage(
-                                model = followUser.avatar,
-                                contentDescription = "${followUser.firstName} 프로필",
-                                modifier = Modifier
-                                    .size(60.dp)
-                                    .clip(CircleShape)
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = "${followUser.firstName} ${followUser.lastName}",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Color(0xFFEFEFEF)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        AsyncImage(
+                            model = followUser.avatar,
+                            contentDescription = "${followUser.firstName} 프로필",
+                            modifier = Modifier
+                                .size(60.dp)
+                                .clip(CircleShape)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "${followUser.firstName} ${followUser.lastName}",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium
+                        )
                     }
                 }
-            } else {
-                Text(
-                    text = "팔로잉 목록이 없습니다",
-                    color = Color.Gray,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(top = 20.dp)
-                )
             }
+        } else {
+            Text(
+                text = "팔로잉 목록이 없습니다",
+                color = Color.Gray,
+                fontSize = 14.sp,
+                modifier = Modifier.padding(top = 20.dp)
+            )
         }
     }
 }
