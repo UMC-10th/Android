@@ -2,13 +2,17 @@ package com.example.NikeApp.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,22 +26,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.NikeApp.model.SampleProducts
+import com.example.NikeApp.ui.component.ProductCard
 import com.example.NikeApp.ui.theme.NikeAppTheme
 import com.example.NikeApp.ui.theme.NikeBlack
 import com.example.NikeApp.ui.theme.NikeGray
 import com.example.NikeApp.ui.theme.NikeLightGray
 
 /**
- * 구매하기 화면.
+ * 구매하기 화면
+ *  - 전체 / Tops & T-shirts / Sale 탭 구성
  */
 private enum class PurchaseTab(val label: String) {
     All("전체"),
     Tops("Tops & T-shirts"),
-    Shoes("Shoes"),
+    Sale("Sale"),
 }
 
 @Composable
-fun PurchaseScreen(modifier: Modifier = Modifier) {
+fun PurchaseScreen(
+    wishlistIds: Set<String>,
+    onToggleWishlist: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     var selectedTab by remember { mutableStateOf(PurchaseTab.All) }
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -46,8 +57,60 @@ fun PurchaseScreen(modifier: Modifier = Modifier) {
             onTabSelected = { selectedTab = it },
         )
 
-        // 본문은 빈 화면
-        Box(modifier = Modifier.fillMaxSize())
+        when (selectedTab) {
+            PurchaseTab.All -> AllProductsGrid(
+                wishlistIds = wishlistIds,
+                onToggleWishlist = onToggleWishlist,
+            )
+            PurchaseTab.Tops, PurchaseTab.Sale -> EmptyTabPlaceholder()
+        }
+    }
+}
+
+/**
+ * '전체' 탭 — LazyVerticalGrid 로 2열 × 4행 구성
+ *  items( ) 로 안정적인 키 부여
+ *  각 상품 카드 우상단의 하트 버튼으로 위시리스트에 추가 및 제거
+ */
+@Composable
+private fun AllProductsGrid(
+    wishlistIds: Set<String>,
+    onToggleWishlist: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        items(
+            items = SampleProducts,
+            key = { product -> product.id },
+        ) { product ->
+            ProductCard(
+                product = product,
+                modifier = Modifier.fillMaxWidth(),
+                showWishButton = true,
+                isWished = product.id in wishlistIds,
+                onWishClick = { onToggleWishlist(product.id) },
+            )
+        }
+    }
+}
+
+@Composable
+private fun EmptyTabPlaceholder(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = " ",
+            fontSize = 14.sp,
+            color = NikeGray,
+        )
     }
 }
 
@@ -113,5 +176,10 @@ private fun PurchaseTabItem(
 @Preview(showBackground = true)
 @Composable
 private fun PurchaseScreenPreview() {
-    NikeAppTheme { PurchaseScreen() }
+    NikeAppTheme {
+        PurchaseScreen(
+            wishlistIds = emptySet(),
+            onToggleWishlist = {},
+        )
+    }
 }

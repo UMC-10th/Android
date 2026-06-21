@@ -41,7 +41,7 @@ enum class BottomTab(
     Profile(AppDestination.Profile, R.drawable.profile_menu),
 }
 
-/** 현재 보여지는 NavDestination이 어떤 탭에 해당하는지 매칭. */
+/** 현재 보여지는 NavDestination이 어떤 탭에 해당하는지 매칭 */
 fun NavDestination?.toBottomTab(): BottomTab? =
     BottomTab.entries.firstOrNull { tab ->
         this?.hasRoute(tab.route::class) == true
